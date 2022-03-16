@@ -1,0 +1,19 @@
+.signup-box {
+    width: 40%;
+    margin: auto;
+    padding: 20px;
+    background-color: #F2F2F2;
+    border-radius: 3px;
+}
+
+.signup-box>h1 {
+    text-align: center;
+}
+
+.signup-box input {
+    background-color: white;
+}
+
+.signup-box>div {
+    margin: 15px auto;
+}
