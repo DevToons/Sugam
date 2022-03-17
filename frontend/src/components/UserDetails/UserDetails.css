@@ -1,0 +1,31 @@
+.user-details-box {
+    width: 60%;
+    margin: auto;
+    padding: 50px;
+    background-color: #F2F2F2;
+    border-radius: 3px;
+}
+
+.user-details-box h1 {
+    margin-bottom: 30px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.user-details-box hr {
+    margin: 30px 0;
+}
+
+.user-details-box .col-6 {
+    margin-bottom: 10px;
+}
+
+.user-details-box .col-6:nth-child(2n+1) {
+    text-align: end;
+    font-weight: bold;
+}
+
+.ration-card-img {
+    width: 200px;
+    height: 300px;
+}
