@@ -1,14 +1,13 @@
 const express = require('express')
 const mongoose = require('mongoose')
 
-
-const Userschema = mongoose.Schema({
+const DistributerSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
         trim: true,
     },
-    rationNo: {
+    number: {
         type: Number,
         required: true,
     },
@@ -27,18 +26,8 @@ const Userschema = mongoose.Schema({
         required: true,
         trim: true
     },
-    distributerName: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    distributerNo: {
-        type: String,
-        required: true,
-        trim: true
-    }
 })
 
 
-const User = mongoose.model('user', Userschema)
-module.exports = User
+const Distributer = mongoose.model('distributer', DistributerSchema)
+module.exports = Distributer
