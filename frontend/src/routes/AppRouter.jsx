@@ -1,5 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import ActiveSlotsPage from '../pages/ActiveSlotsPage/ActiveSlotsPage';
+import BookSlotPage from '../pages/BookslotPage/BookslotPage';
 import CreateSlotPage from '../pages/CreateSlotPage/CreateSlotPage';
 import DistributorDetailsPage from '../pages/DistributorDetailsPage/DistributorDetailsPage';
 import DistributorRegistrationPage from '../pages/DistributorRegistrationPage/DistributorRegistrationPage';
@@ -17,11 +19,11 @@ const Routing = () => {
             <Route path='/otp-verification' element={<OtpPage />} />
             <Route path='/user/:userId/register' element={<UserRegistrationPage />} />
             <Route path='/user/:userId/details' element={<UserDetailsPage />} />
-            <Route path='/user/:userId/bookSlot' element={<UserDetailsPage />} />
+            <Route path='/user/:userId/bookSlot' element={<BookSlotPage />} />
             <Route path='/distributor/:distributorId/register' element={<DistributorRegistrationPage />} />
             <Route path='/distributor/:distributorId/details' element={<DistributorDetailsPage />} />
             <Route path='/distributor/:distributorId/createSlots' element={<CreateSlotPage />} />
-            <Route path='/distributor/:distributorId/activeSlots' element={<DistributorRegistrationPage />} />
+            <Route path='/distributor/:distributorId/activeSlots' element={<ActiveSlotsPage />} />
         </Routes>
     )
 };

@@ -1,4 +1,5 @@
-import React from "react";import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import React from "react";
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import CalendarPicker from '@mui/lab/CalendarPicker';
 import TextField from '@mui/material/TextField';
@@ -8,6 +9,12 @@ import './CreateSlot.css';
 
 const CreateSlot = () => {    
 
+    /*
+
+    a get request that will fetch the slots created by this distributor so that we can disable those dates in this component
+    
+    */
+
     const [date, setDate] = React.useState(new Date());
     const [startTime, setStartTime] = React.useState(null);
     const [endTime, setEndTime] = React.useState(null);
@@ -16,6 +23,10 @@ const CreateSlot = () => {
         console.log(date);
         console.log(startTime.getHours(), startTime.getMinutes());
         console.log(endTime.getHours(), endTime.getMinutes());
+
+        /**
+         * post request
+         */
     }
 
     const disableDates = (date) => {
