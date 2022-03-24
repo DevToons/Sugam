@@ -1,47 +1,49 @@
-const express = require('express')
 const mongoose = require('mongoose')
 
-
 const slotSchema = mongoose.Schema({
-    distributorName: {
-        type: String,
-        required: true,
-    },
-    distributorNo: {
-        type: Number,
-        required: true,
-    },
-    city: {
-        type: String,
-        required: true,
-    },
-    state: {
-        type: String,
-        required: true,
+    // distributorName: {
+    //     type: String,
+    //     
+    // },
+    // distributorNo: {
+    //     type: Number,
+    //     
+    // },
+    // city: {
+    //     type: String,
+    //     
+    // },
+    // state: {
+    //     type: String,
+    //     
+    // },
+    distributerID: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
     },
     date: {
         type: String,
-        required: true,
+        required: true
     },
     startHour: {
         type: Number,
-        required: true,
+        required: true
     },
     startMinutes: {
         type: Number,
-        required: true,
+        required: true
     },
     endHour: {
         type: Number,
-        required: true,
+        required: true
     },
     endMinutes: {
         type: Number,
-        required: true,
+        required: true
     },
     Count: {
         type: Number,
-        required: true,
+        required: true
     }
 })
 
