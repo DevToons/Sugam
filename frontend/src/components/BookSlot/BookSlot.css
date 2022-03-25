@@ -1,0 +1,32 @@
+.book-slot-box {
+    width: 50%;
+    margin: 30px auto;
+    border: 1px solid black;
+    padding: 40px 50px;
+}
+
+.book-slot-box .row>div:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.time-slot-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.time-slot {
+    border: 2px solid grey;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    margin: 5px;
+    cursor: pointer;
+}

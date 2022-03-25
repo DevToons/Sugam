@@ -91,7 +91,7 @@ const UserRegistrationPage = () => {
 
     return (
         <>
-            <div className="signup-box">
+            <div className="registration-box">
 
                 <h1>User Registration</h1>
             

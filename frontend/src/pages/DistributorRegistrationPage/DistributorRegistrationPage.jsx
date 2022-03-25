@@ -5,8 +5,11 @@ import axios from 'axios';
 import MenuItem from '@mui/material/MenuItem';
 import './DistributorRegistrationPage.css';
 import { ReactComponent as Loading } from "../../assets/loading.svg";
+import { UserContext } from "../../store/user";
 
 const DistributorRegistrationPage = () => {
+
+    const { user, dispatchUser } = React.useContext(UserContext);
 
     const [ details, setDetails ] = React.useState({
         name: '',
@@ -83,6 +86,22 @@ const DistributorRegistrationPage = () => {
     const handleSubmit = (e) => {
         
         console.log(details);
+
+        axios.post(`http://localhost:5000/user/${user.uid}/register`, {
+            headers: {
+                Authorization: `Bearer ${user.accessToken}`
+            },
+            body: JSON.stringify({
+                name: details.name,
+                rationNo: details.rationNo,
+                city: details.city,
+                state: details.state
+            }),
+        }).then((data) => {
+            console.log("successfully registered");
+        }).catch((error) => {
+            console.log(error);
+        });
 
         setDetails({
             name: '',

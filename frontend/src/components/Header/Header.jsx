@@ -6,9 +6,12 @@ const Header = () => {
         <div>
             <Link to='/'>Home</Link>
             <Link to='/signup'>Sign Up</Link>
-            <Link to='/user/register'>Register(User)</Link>
-            <Link to='/user/details'>Details(User)</Link>
-            <Link to='/distributor/register'>Register(Distributor)</Link>
+            <Link to='/user/1/register'>Register(User)</Link>
+            <Link to='/user/1/details'>Details(User)</Link>
+            <Link to='/distributor/1/register'>Register(Distributor)</Link>
+            <Link to='/distributor/1/createSlots'>Create Slots</Link>
+            <Link to='/distributor/1/activeSlots'>Active Slots</Link>
+            <Link to='/user/1/bookSlot'>Book Slot</Link>
         </div>
     );
 }

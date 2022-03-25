@@ -1,0 +1,22 @@
+.create-slot-box {
+    width: 50%;
+    margin: 30px auto;
+    border: 1px solid black;
+    padding: 40px 50px;
+}
+
+.create-slot-box .row>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-slot-time {
+    margin: 15px 0 !important;
+}
+
+.create-slot-button {
+    display: block !important;
+    margin-left: auto !important;
+}
