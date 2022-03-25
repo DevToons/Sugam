@@ -87,9 +87,9 @@ const DistributorRegistrationPage = () => {
         
         console.log(details);
 
-        axios.post(`http://localhost:5000/user/${user.uid}/register`, {
+        axios.post(`http://localhost:5000/ditributer/${user.uid}/register`, {
             headers: {
-                Authorization: `Bearer ${user.accessToken}`
+                Authorization: `Bearer ${user.token}`
             },
             body: JSON.stringify({
                 name: details.name,

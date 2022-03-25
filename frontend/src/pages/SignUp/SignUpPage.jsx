@@ -57,6 +57,7 @@ const SignUpPage = () => {
 
         window.confirmationResult.confirm(code.otp)
             .then((result) => {
+                
                 dispatchUser(storeUser(result.user));
 
             }).catch((error) => {
