@@ -11,17 +11,17 @@ const DistributorRegistrationPage = () => {
 
     const { user, dispatchUser } = React.useContext(UserContext);
 
-    const [ details, setDetails ] = React.useState({
+    const [details, setDetails] = React.useState({
         name: '',
         number: '',
         city: '',
         state: ''
     });
 
-    const [ authToken, setAuthToken ] = React.useState('');
-    const [ states, setStates ] = React.useState([]);
-    const [ cities, setCities ] = React.useState([]);
-    const [ isLoading, doneLoading ] = React.useState(true);
+    const [authToken, setAuthToken] = React.useState('');
+    const [states, setStates] = React.useState([]);
+    const [cities, setCities] = React.useState([]);
+    const [isLoading, doneLoading] = React.useState(true);
 
     React.useEffect(() => {
 
@@ -83,45 +83,52 @@ const DistributorRegistrationPage = () => {
         ));
     }
 
-    const handleSubmit = (e) => {
-        
+    const handleSubmit = async (e) => {
+
         console.log(details);
+        console.log(user)
+        const data = details;
+        try {
+            const res = await fetch(`http://localhost:5000/distributer/${user.user.uid}/register`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + user.token.token,
+                },
+                mode: "cors",
+                body : JSON.stringify({
+                    name: details.name,
+                    number: details.number,
+                    city: details.city,
+                    state: details.state
+                })
+            });
 
-        axios.post(`http://localhost:5000/user/${user.uid}/register`, {
-            headers: {
-                Authorization: `Bearer ${user.accessToken}`
-            },
-            body: JSON.stringify({
-                name: details.name,
-                rationNo: details.rationNo,
-                city: details.city,
-                state: details.state
-            }),
-        }).then((data) => {
-            console.log("successfully registered");
-        }).catch((error) => {
-            console.log(error);
-        });
+            console.log(res)
+        } catch (e) {
+            console.log(e)
+        }
 
-        setDetails({
-            name: '',
-            rationNo: '',
-            city: '',
-            state: ''
-        });
+        // setDetails({
+        //     name: '',
+        //     number: '',
+        //     city: '',
+        //     state: ''
+        // });
     }
 
     return (
         <>
 
-            { 
+            {
                 isLoading ? <Loading /> : null
             }
-            
+
             <div className="signup-box">
 
                 <h1>Distributor Registration</h1>
-            
+
                 <TextField
                     label="Enter Ditributor Number"
                     size="small"
@@ -140,14 +147,14 @@ const DistributorRegistrationPage = () => {
                     fullWidth
                 />
 
-                <TextField 
-                    label="Select State" 
+                <TextField
+                    label="Select State"
                     margin="dense"
                     size="small"
                     name="state"
                     select
                     fullWidth
-                    value={details.state} 
+                    value={details.state}
                     onChange={handleChange}
                 >
                     {
@@ -157,14 +164,14 @@ const DistributorRegistrationPage = () => {
                     }
                 </TextField>
 
-                <TextField 
-                    label="Select City" 
+                <TextField
+                    label="Select City"
                     margin="dense"
                     size="small"
                     name="city"
                     select
                     fullWidth
-                    value={details.city} 
+                    value={details.city}
                     onChange={handleChange}
                 >
                     {
@@ -174,8 +181,8 @@ const DistributorRegistrationPage = () => {
                     }
                 </TextField>
 
-                <Button 
-                    variant="contained" 
+                <Button
+                    variant="contained"
                     onClick={handleSubmit}
                     fullWidth
                 >Verify & Proceed</Button>
