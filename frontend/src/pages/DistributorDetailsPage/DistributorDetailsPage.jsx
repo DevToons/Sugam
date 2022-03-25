@@ -9,6 +9,8 @@ const DistributorDetailsPage = () => {
 
     const { distributorId } = useParams();
 
+    React.useEffect(() => {}, []);
+
     const details = distributorData.find((data) => ( data.id==distributorId ));
 
     const navigate=useNavigate();
