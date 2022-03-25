@@ -1,4 +1,4 @@
-.signup-box {
+.registration-box {
     width: 40%;
     margin: auto;
     padding: 20px;
@@ -6,7 +6,8 @@
     border-radius: 3px;
 }
 
-.signup-box>h1 {
+
+/* .signup-box>h1 {
     text-align: center;
 }
 
@@ -16,4 +17,4 @@
 
 .signup-box>div {
     margin: 15px auto;
-}
+} */

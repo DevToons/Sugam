@@ -6,7 +6,6 @@ import CreateSlotPage from '../pages/CreateSlotPage/CreateSlotPage';
 import DistributorDetailsPage from '../pages/DistributorDetailsPage/DistributorDetailsPage';
 import DistributorRegistrationPage from '../pages/DistributorRegistrationPage/DistributorRegistrationPage';
 import HomePage from '../pages/HomePage/HomePage';
-import OtpPage from '../pages/OtpPage/OtpPage';
 import SignUpPage from '../pages/SignUp/SignUpPage';
 import UserDetailsPage from '../pages/UserDetailsPage/UserDetailsPage';
 import UserRegistrationPage from '../pages/UserRegistrationPage/UserRegistrationPage';
@@ -16,7 +15,6 @@ const Routing = () => {
         <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/signup' element={<SignUpPage />} />
-            <Route path='/otp-verification' element={<OtpPage />} />
             <Route path='/user/:userId/register' element={<UserRegistrationPage />} />
             <Route path='/user/:userId/details' element={<UserDetailsPage />} />
             <Route path='/user/:userId/bookSlot' element={<BookSlotPage />} />

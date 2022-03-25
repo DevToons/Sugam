@@ -70,10 +70,12 @@ const SignUpPage = () => {
     return (
 
         <OtpContext.Provider value={provider}>
-            {
-                code.phoneNo === null ? <SignUpBox /> : <OtpBox />
-            }
-            <div id="recaptcha-container"></div>
+            <div className="signup-page">
+                {
+                    code.phoneNo === null ? <SignUpBox /> : <OtpBox />
+                }
+                <div id="recaptcha-container"></div>
+            </div>
         </OtpContext.Provider>
     );
 }
