@@ -1,48 +1,80 @@
 import React from "react";
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { useNavigate } from "react-router-dom";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
 import './SignUpPage.css';
+import { OtpContext } from "../../store/otp";
+import { UserContext } from "../../store/user";
+import { otpReducer } from "../../reducer/otp";
+import SignUpBox from "../../components/SignUpBox/SignUpBox";
+import OtpBox from "../../components/OtpBox/OtpBox";
+import { storeUser } from "../../actions/user";
 
 const SignUpPage = () => {
 
-    const navigate=useNavigate();
+    const { user, dispatchUser } = React.useContext(UserContext);
 
-    const [ phoneNo, setPhoneNo ] = React.useState('');
+    const [ code, dispatchCode ] = React.useReducer(otpReducer,{
+        phoneNo:null,
+        otp:null
+    });
 
-    const handleChange = (e) => {
-        setPhoneNo(e.target.value);
+    const provider = {
+        code,
+        dispatchCode
     }
 
-    const handleSubmit = (e) => {
-        console.log(phoneNo);
-        setPhoneNo('');
-        navigate('/otp-verification');
-    }
+    React.useEffect(() => {
+
+        window.recaptchaVerifier=new RecaptchaVerifier('recaptcha-container', {
+            'size': 'invisible',
+            'callback': (response) => {
+            }
+        }, auth);
+
+    }, []);
+
+    React.useEffect(() => {
+        
+        let appVerifier = window.recaptchaVerifier;
+        console.log(code.phoneNo)
+
+        signInWithPhoneNumber(auth, code.phoneNo, appVerifier)
+        .then((confirmationResult) => {
+
+            window.confirmationResult=confirmationResult;
+
+        }).catch((error) => {
+            console.log(error)
+        });
+
+    }, [code.phoneNo]);
+
+    React.useEffect(() => {
+
+        if (!window.confirmationResult) {
+            return;
+        }
+
+        window.confirmationResult.confirm(code.otp)
+            .then((result) => {
+                dispatchUser(storeUser(result.user));
+
+            }).catch((error) => {
+                console.log(error);
+            })
+
+    }, [code.otp]);
+
+    console.log(user)
 
     return (
-        <>
-            <div className="signup-box">
 
-                <h1>Sign up</h1>
-            
-                <TextField
-                    label="Enter your mobile number"
-                    type="tel"
-                    size="small"
-                    value={phoneNo}
-                    onChange={handleChange}
-                    fullWidth
-                />
-
-                <Button 
-                    variant="contained" 
-                    onClick={handleSubmit}
-                    fullWidth
-                >Get OTP</Button>
-
-            </div>
-        </>
+        <OtpContext.Provider value={provider}>
+            {
+                code.phoneNo === null ? <SignUpBox /> : <OtpBox />
+            }
+            <div id="recaptcha-container"></div>
+        </OtpContext.Provider>
     );
 }
 

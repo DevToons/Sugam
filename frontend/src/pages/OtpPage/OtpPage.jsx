@@ -18,26 +18,7 @@ const OtpPage = () => {
 
     return (
         <>
-            <div className="signup-box">
-
-                <h1>OTP Verification</h1>
             
-                <TextField
-                    label="Enter OTP"
-                    type="tel"
-                    size="small"
-                    value={otp}
-                    onChange={handleChange}
-                    fullWidth
-                />
-
-                <Button 
-                    variant="contained" 
-                    onClick={handleSubmit}
-                    fullWidth
-                >Verify & Proceed</Button>
-
-            </div>
         </>
     );
 }
