@@ -8,13 +8,44 @@ import { bookSlotData } from "../../data/bookSlotData";
 import './ActiveSlotsPage.css';
 import moment from 'moment';
 import ActiveSlot from "../../components/ActiveSlot/ActiveSlot";
+import { useParams } from "react-router-dom";
+import { UserContext } from "../../store/user";
 
 const ActiveSlotsPage = () => {
+
+    const { user, dispatchUser } = React.useContext(UserContext);
+
+    const { distributorId } = useParams();
 
 /**
  * 
  *  get request that will fetch all the active slots from for this particular distributor
+ * 
  */
+
+    const [ bookSlotData, setBookSlotData ] = React.useState([]);
+
+    React.useEffect(async () => {
+
+        try {
+            const res = await fetch(`http://localhost:5000/distributer/${distributorId}/activeSlots`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + user.token.token,
+                },
+                mode: "cors",
+            });
+
+            const data = await res.json();
+
+            setBookSlotData(data);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }, []);
 
     return (
         <div className="active-slot-page">
@@ -38,6 +69,7 @@ const ActiveSlotsPage = () => {
                                 <ActiveSlot
                                     key={index}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    distributorId={distributorId}
                                     id={slot.id}
                                     details={`
                                         Name: ${slot.userName}

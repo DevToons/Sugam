@@ -86,7 +86,7 @@ const DistributorRegistrationPage = () => {
     const handleSubmit = async (e) => {
 
         console.log(details);
-        console.log(user)
+        
         const data = details;
         try {
             const res = await fetch(`http://localhost:5000/distributer/${user.user.uid}/register`, {
@@ -110,12 +110,12 @@ const DistributorRegistrationPage = () => {
             console.log(e)
         }
 
-        // setDetails({
-        //     name: '',
-        //     number: '',
-        //     city: '',
-        //     state: ''
-        // });
+        setDetails({
+            name: '',
+            number: '',
+            city: '',
+            state: ''
+        });
     }
 
     return (

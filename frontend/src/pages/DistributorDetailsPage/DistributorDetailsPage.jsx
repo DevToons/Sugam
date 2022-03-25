@@ -4,14 +4,36 @@ import Button from '@mui/material/Button';
 import { useNavigate, useParams } from "react-router-dom";
 import { distributorData } from "../../data/distributorData";
 import './DistributorDetailsPage.css';
+import { UserContext } from "../../store/user";
 
 const DistributorDetailsPage = () => {
 
+    const { user, dispatchUser } = React.useContext(UserContext);
+
     const { distributorId } = useParams();
 
-    React.useEffect(() => {}, []);
+    const [ details, setDetails ] = React.useState({});
 
-    const details = distributorData.find((data) => ( data.id==distributorId ));
+    React.useEffect(async () => {
+
+        try {
+            const res = await fetch(`http://localhost:5000/distributer/${distributorId}/dashboard`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + user.token.token,
+                },
+                mode: "cors",
+            });
+
+            const data = await res.json();
+
+            setDetails(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
 
     const navigate=useNavigate();
 

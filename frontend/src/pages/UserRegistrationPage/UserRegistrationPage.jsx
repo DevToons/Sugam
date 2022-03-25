@@ -4,8 +4,11 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import MenuItem from '@mui/material/MenuItem';
 import './UserRegistrationPage.css';
+import { UserContext } from "../../store/user";
 
 const UserRegistrationPage = () => {
+
+    const { user, dispatchUser } = React.useContext(UserContext);
 
     const [ details, setDetails ] = React.useState({
         name: '',
@@ -77,9 +80,32 @@ const UserRegistrationPage = () => {
         ));
     }
 
-    const handleSubmit = (e) => {
-        
+    const handleSubmit = async (e) => {
+
         console.log(details);
+        
+        const data = details;
+        try {
+            const res = await fetch(`http://localhost:5000/user/${user.user.uid}/register`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + user.token.token,
+                },
+                mode: "cors",
+                body : JSON.stringify({
+                    name: details.name,
+                    rationNo: details.rationNo,
+                    city: details.city,
+                    state: details.state
+                })
+            });
+
+            console.log(res)
+        } catch (e) {
+            console.log(e)
+        }
 
         setDetails({
             name: '',

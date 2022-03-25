@@ -3,14 +3,29 @@ import './ActiveSlot.css';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
+import { UserContext } from "../../store/user";
 
-const ActiveSlot = ({ id, details, image, time, status }) => {
+const ActiveSlot = ({ distributorId, id, details, image, time, status }) => {
 
-    const handleChange = () => {
-        /**
-         * 
-         * a delete request that will delete this slot from the database
-         */
+    const { user, dispatchUser } = React.useContext(UserContext);
+
+    const handleChange = async () => {
+
+         try {
+             
+            const res = await fetch(`http://localhost:5000/distributer/${distributorId}/activeSlots/${id}/markDone`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + user.token.token,
+                },
+                mode: "cors",
+            });
+            
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
