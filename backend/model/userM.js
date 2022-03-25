@@ -25,6 +25,7 @@ const Userschema = new mongoose.Schema({
     },
     uid: {
         type: String,
+        unique: true
     }
 })
 

@@ -5,10 +5,11 @@ exports.protect = async(req, res, next) => {
     console.log(token)
     try {
         const decodeValue = await admin.auth().verifyIdToken(token);
+        console.log(decodeValue)
         if (!decodeValue) {
             return res.json({ message: 'un authorized' })
         }
-        req.user = decodeValue;
+        req.client = decodeValue;
         next()
     } catch (e) {
         return res.json({ message: 'internal error' })
