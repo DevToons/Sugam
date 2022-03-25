@@ -9,44 +9,17 @@ const BookedSchema = mongoose.Schema({
         trim: true,
         required: true
     },
-    distributerID: {
+    distributerId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
-    // distributorName: {
-    //     type: String,
-    //     trim: true,
-    //     required: true
-    // },
-    // distributorNo: {
-    //     type: String,
-    //     trim: true,
-    //     required: true
-    // },
-    // city: {
-    //     type: String,
-    //     trim: true,
-    //     required: true
-    // },
-    // state: {
-    //     type: String,
-    //     trim: true,
-    //     required: true
-    // },
     date: {
         type: String,
         trim: true,
         required: true
     },
     time: {
-        hour: {
-            type: Number,
-            required: true
-        },
-        minutes: {
-            type: Number,
-            required: true
-        },
+        type: Number,
     }
 })
 

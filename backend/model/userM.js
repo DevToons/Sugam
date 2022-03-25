@@ -17,11 +17,8 @@ const Userschema = new mongoose.Schema({
     image: {
         type: String,
     },
-    distributerName: {
-        type: String,
-    },
-    distributerNo: {
-        type: String,
+    distributerId: {
+        type: mongoose.Schema.Types.ObjectId
     },
     uid: {
         type: String,

@@ -2,17 +2,21 @@ const express = require("express");
 require("./db/mongoose")
 const userRouter = require('./routes/user');
 const DistributerRouter = require('./routes/Distributer');
-const Slot = require('./routes/slot');
-
+const cors = require('cors')
 const { protect } = require('../backend/Middleware/protect');
-
+const bodyParser = require('body-parser')
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
+
+app.use(cors());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(express.json());
 app.use(userRouter);
 app.use(DistributerRouter);
-app.use(Slot);
-// app.use(protect);
+
 
 app.listen(PORT, () => {
-    console.log("server is connected on port 3000")
+    console.log("server is connected on port 5000")
 })

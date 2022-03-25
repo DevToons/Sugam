@@ -6,7 +6,7 @@ const Distributer = require('../model/DistributerM');
 const Slot = require('../model/SlotM')
 const Booked = require("../model/bookedSlot")
 
-router.get('/:distributerId/dashboard', protect, async(req, res) => {
+router.get('/distributer/:distributerId/dashboard', protect, async(req, res) => {
 
     const distributerId = req.params.distributerId;
 
@@ -26,13 +26,13 @@ router.get('/:distributerId/dashboard', protect, async(req, res) => {
     };
 });
 
-router.post('/:distributerId/registration', async(req, res) => {
+router.post('/distributer/:distributerId/register', protect, async(req, res) => {
 
     const distributerId = req.params.distributerId;
     const data = req.body;
-
+    console.log(req.body)
     try {
-        const distributer = await Distributer.findOne(data);
+        const distributer = await Distributer.findOne(req.body);
         distributer.uid = distributerId;
 
         await distributer.save();

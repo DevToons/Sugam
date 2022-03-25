@@ -1,6 +1,7 @@
 const admin = require('../config/firebase-config');
 exports.protect = async(req, res, next) => {
     console.log('auth')
+    console.log(req.headers)
     const token = req.headers.authorization.split(" ")[1];
     console.log(token)
     try {

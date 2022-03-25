@@ -6,7 +6,7 @@ const DistributerSchema = mongoose.Schema({
         required: true,
     },
     number: {
-        type: Number,
+        type: String,
         required: true,
     },
     city: {
@@ -18,6 +18,9 @@ const DistributerSchema = mongoose.Schema({
     image: {
         type: String,
     },
+    uid: {
+        type: String
+    }
 })
 
 
