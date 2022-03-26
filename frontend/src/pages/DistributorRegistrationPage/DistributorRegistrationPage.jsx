@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import './DistributorRegistrationPage.css';
 import { ReactComponent as Loading } from "../../assets/loading.svg";
 import { UserContext } from "../../store/user";
+import { useNavigate } from "react-router-dom";
 
 const DistributorRegistrationPage = () => {
 
@@ -22,6 +23,8 @@ const DistributorRegistrationPage = () => {
     const [states, setStates] = React.useState([]);
     const [cities, setCities] = React.useState([]);
     const [isLoading, doneLoading] = React.useState(true);
+
+    const navigate = useNavigate();
 
     React.useEffect(() => {
 
@@ -48,7 +51,7 @@ const DistributorRegistrationPage = () => {
             }
         }).then((data) => {
             setStates(data.data);
-            doneLoading(false)
+            doneLoading(false);
         }).catch((error) => {
             console.log(error);
         });
@@ -87,7 +90,6 @@ const DistributorRegistrationPage = () => {
 
         console.log(details);
         
-        const data = details;
         try {
             const res = await fetch(`http://localhost:5000/distributer/${user.user.uid}/register`, {
                 method: 'POST',
@@ -105,7 +107,8 @@ const DistributorRegistrationPage = () => {
                 })
             });
 
-            console.log(res)
+            console.log(res.json());
+            navigate(`/distributor/${user.user.uid}/details`);
         } catch (e) {
             console.log(e)
         }
@@ -122,72 +125,72 @@ const DistributorRegistrationPage = () => {
         <>
 
             {
-                isLoading ? <Loading /> : null
+                isLoading ? <Loading /> : 
+
+                <div className="signup-box">
+
+                    <h1>Distributor Registration</h1>
+
+                    <TextField
+                        label="Enter Ditributor Number"
+                        size="small"
+                        name="number"
+                        value={details.number}
+                        onChange={handleChange}
+                        fullWidth
+                    />
+
+                    <TextField
+                        label="Enter Ditributor Name"
+                        size="small"
+                        name="name"
+                        value={details.name}
+                        onChange={handleChange}
+                        fullWidth
+                    />
+
+                    <TextField
+                        label="Select State"
+                        margin="dense"
+                        size="small"
+                        name="state"
+                        select
+                        fullWidth
+                        value={details.state}
+                        onChange={handleChange}
+                    >
+                        {
+                            states.map((state, index) => (
+                                <MenuItem key={index} value={state.state_name}>{state.state_name}</MenuItem>
+                            ))
+                        }
+                    </TextField>
+
+                    <TextField
+                        label="Select City"
+                        margin="dense"
+                        size="small"
+                        name="city"
+                        select
+                        fullWidth
+                        value={details.city}
+                        onChange={handleChange}
+                    >
+                        {
+                            cities.map((city, index) => (
+                                <MenuItem key={index} value={city.city_name}>{city.city_name}</MenuItem>
+                            ))
+                        }
+                    </TextField>
+
+                    <Button
+                        variant="contained"
+                        onClick={handleSubmit}
+                        fullWidth
+                    >Verify & Proceed</Button>
+
+                </div>
             }
-
-            <div className="signup-box">
-
-                <h1>Distributor Registration</h1>
-
-                <TextField
-                    label="Enter Ditributor Number"
-                    size="small"
-                    name="number"
-                    value={details.number}
-                    onChange={handleChange}
-                    fullWidth
-                />
-
-                <TextField
-                    label="Enter Ditributor Name"
-                    size="small"
-                    name="name"
-                    value={details.name}
-                    onChange={handleChange}
-                    fullWidth
-                />
-
-                <TextField
-                    label="Select State"
-                    margin="dense"
-                    size="small"
-                    name="state"
-                    select
-                    fullWidth
-                    value={details.state}
-                    onChange={handleChange}
-                >
-                    {
-                        states.map((state, index) => (
-                            <MenuItem key={index} value={state.state_name}>{state.state_name}</MenuItem>
-                        ))
-                    }
-                </TextField>
-
-                <TextField
-                    label="Select City"
-                    margin="dense"
-                    size="small"
-                    name="city"
-                    select
-                    fullWidth
-                    value={details.city}
-                    onChange={handleChange}
-                >
-                    {
-                        cities.map((city, index) => (
-                            <MenuItem key={index} value={city.city_name}>{city.city_name}</MenuItem>
-                        ))
-                    }
-                </TextField>
-
-                <Button
-                    variant="contained"
-                    onClick={handleSubmit}
-                    fullWidth
-                >Verify & Proceed</Button>
-
-            </div>
         </>
     );
 }

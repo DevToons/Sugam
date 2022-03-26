@@ -1,15 +1,16 @@
 import React from "react";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
-import './SignUpPage.css';
+import './UserSignUpPage.css';
 import { OtpContext } from "../../store/otp";
 import { UserContext } from "../../store/user";
 import { otpReducer } from "../../reducer/otp";
 import SignUpBox from "../../components/SignUpBox/SignUpBox";
 import OtpBox from "../../components/OtpBox/OtpBox";
 import { storeUser } from "../../actions/user";
+import { useNavigate } from "react-router-dom";
 
-const SignUpPage = () => {
+const UserSignUpPage = () => {
 
     const { user, dispatchUser } = React.useContext(UserContext);
 
@@ -17,6 +18,8 @@ const SignUpPage = () => {
         phoneNo:null,
         otp:null
     });
+
+    const navigate=useNavigate();
 
     const provider = {
         code,
@@ -36,7 +39,6 @@ const SignUpPage = () => {
     React.useEffect(() => {
         
         let appVerifier = window.recaptchaVerifier;
-        console.log(code.phoneNo)
 
         signInWithPhoneNumber(auth, code.phoneNo, appVerifier)
         .then((confirmationResult) => {
@@ -58,6 +60,7 @@ const SignUpPage = () => {
         window.confirmationResult.confirm(code.otp)
             .then((result) => {
                 dispatchUser(storeUser(result.user));
+                navigate(`/user/${result.user.uid}/details`);
 
             }).catch((error) => {
                 console.log(error);
@@ -80,4 +83,4 @@ const SignUpPage = () => {
     );
 }
 
-export default SignUpPage;
+export default UserSignUpPage;
