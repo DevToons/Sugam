@@ -7,6 +7,7 @@ import { userReducer } from "./reducer/user";
 import { auth } from "./firebase/firebase";
 import { getIdTokenResult } from "firebase/auth";
 import { storeToken } from "./actions/user";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
 

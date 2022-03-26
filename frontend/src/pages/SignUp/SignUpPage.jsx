@@ -70,7 +70,7 @@ const SignUpPage = () => {
     return (
 
         <OtpContext.Provider value={provider}>
-            <div className="signup-page">
+            <div className="h-full py-16 px-4 signup-page">
                 {
                     code.phoneNo === null ? <SignUpBox /> : <OtpBox />
                 }

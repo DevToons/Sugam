@@ -1,0 +1,9 @@
+.body {
+    margin-right: 2rem;
+    display: flex;
+    flex-direction: row;
+    font-family: 'Sofia Pro', sans-serif;
+    cursor: pointer;
+    position: relative;
+    color: white;
+}

@@ -1,9 +1,13 @@
-import React from "react";
+import React, { Fragment } from "react";
 import './HomePage.css';
+import { Carousel1 } from "./UI/Carousel";
 
 const HomePage = () => {
     return (
-        <h1>Home</h1>
+        <Fragment>
+            {/* <h1>Home</h1> */}
+            <Carousel1 />
+        </Fragment>
     );
 }
 

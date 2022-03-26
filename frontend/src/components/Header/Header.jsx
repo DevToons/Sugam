@@ -1,17 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import styles from './Header.module.css';
 const Header = () => {
     return (
-        <div>
-            <Link to='/'>Home</Link>
-            <Link to='/signup'>Sign Up</Link>
-            <Link to='/user/1/register'>Register(User)</Link>
-            <Link to='/user/1/details'>Details(User)</Link>
-            <Link to='/distributor/1/register'>Register(Distributor)</Link>
-            <Link to='/distributor/1/createSlots'>Create Slots</Link>
-            <Link to='/distributor/1/activeSlots'>Active Slots</Link>
-            <Link to='/user/1/bookSlot'>Book Slot</Link>
+        <div className={`${styles.body} space-x-2 mx-3`}>
+            <div className="mx-2"><Link to='/'>Home</Link></div>
+            <div className="mx-2">
+                <Link to='/signup'>Sign Up</Link>
+            </div>
+            <div className="mx-2"> 
+                <Link to='/user/1/register'>Register(User)</Link>
+            </div>
+            <div className="mx-2">
+                <Link to='/user/1/details'>Details(User)</Link>
+            </div>
+            <div className="mx-2">
+                <Link to='/distributor/1/register'>Register(Distributor)</Link>
+            </div>
+            <div className="mx-2" >
+                <Link to='/distributor/1/createSlots'>Create Slots</Link>
+            </div>
+            <div className="mx-2">
+                <Link to='/distributor/1/activeSlots'>Active Slots</Link>
+            </div>
+            <div className="mx-2">
+                <Link to='/user/1/bookSlot'>Book Slot</Link>
+            </div>
         </div>
     );
 }
