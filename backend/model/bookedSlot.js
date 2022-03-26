@@ -10,7 +10,7 @@ const BookedSchema = mongoose.Schema({
         required: true
     },
     distributerId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
     },
     date: {

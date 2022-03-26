@@ -1,47 +1,19 @@
 const mongoose = require('mongoose')
 
 const slotSchema = mongoose.Schema({
-    // distributorName: {
-    //     type: String,
-    //     
-    // },
-    // distributorNo: {
-    //     type: Number,
-    //     
-    // },
-    // city: {
-    //     type: String,
-    //     
-    // },
-    // state: {
-    //     type: String,
-    //     
-    // },
-    distributerID: {
-        type: mongoose.Schema.Types.ObjectId,
+    distributerId: {
+        type: String,
         required: true
     },
     date: {
         type: String,
         required: true
     },
-    startHour: {
+    startTime: {
         type: Number,
         required: true
     },
-    startMinutes: {
-        type: Number,
-        required: true
-    },
-    endHour: {
-        type: Number,
-        required: true
-    },
-    endMinutes: {
-        type: Number,
-        required: true
-    },
-    Count: {
+    count: {
         type: Number,
         required: true
     }

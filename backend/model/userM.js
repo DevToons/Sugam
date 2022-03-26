@@ -5,7 +5,7 @@ const Userschema = new mongoose.Schema({
         type: String,
     },
     rationNo: {
-        type: Number,
+        type: String,
         unique: true,
     },
     city: {
@@ -17,8 +17,8 @@ const Userschema = new mongoose.Schema({
     image: {
         type: String,
     },
-    distributerId: {
-        type: mongoose.Schema.Types.ObjectId
+    distributorId: {
+        type: String
     },
     uid: {
         type: String,

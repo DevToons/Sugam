@@ -3,6 +3,7 @@ const validator = require("validator")
 const router = new express.Router();
 const { protect } = require('../Middleware/protect');
 const Booked = require("../model/bookedSlot");
+const Distributer = require("../model/DistributerM");
 const Slot = require("../model/SlotM")
 const User = require('../model/userM');
 
@@ -19,81 +20,86 @@ router.post('/login', async(req, res) => {
 
 //dashboard
 router.get('/user/:userId/dashboard', protect, async(req, res) => {
-    const userId = req.params.userId;
+        const userId = req.params.userId;
 
-    try {
-        const user = await User.findOne({ uid: userId });
+        try {
+            const user = await User.findOne({ uid: userId });
 
-        if (!user) {
-            res.send({
-                message: "registrations is required"
-            });
-        }
+            if (!user) {
+                res.send({
+                    message: "registrations is required"
+                });
+            }
 
-        res.status(200).send(user);
+            res.status(200).send(user);
 
-    } catch (error) {
-        res.status(400).send(error);
-    };
-})
-
+        } catch (error) {
+            res.status(400).send(error);
+        };
+    })
+    //checked
 router.post('/user/:userId/register', protect, async(req, res) => {
-    const userId = req.params.userId;
-    const data = req.body;
+        const userId = req.params.userId;
+        const data = req.body;
+        try {
+            const user = await User.findOne(req.body);
+            user.uid = userId;
+            console.log(user)
 
-    try {
-        const user = await User.findOne(data);
-        user.uid = userId;
+            await user.save();
 
-        await user.save();
+            res.status(200).send(user);
 
-        res.status(200).send(user);
-
-    } catch (error) {
-        res.status(400).send(error);
-    };
-})
-
-router.get('user/:userId/getSlots', protect, async(req, res) => {
+        } catch (error) {
+            res.status(400).send(error);
+        };
+    })
+    //checked
+router.get('/user/:userId/getSlots', protect, async(req, res) => {
 
     const userId = req.params.userId;
     try {
         const user = await User.findOne({ uid: userId });
-        const distributerId = user.distributerId;
+        const distributerId = user.distributorId;
+        const distributer = await Distributer.findById({ _id: distributerId });
 
-        const slots = await Slot.find({ distributerId });
+        const distributerUid = distributer.uid;
+        const slots = await Slot.find({ distributerUid });
 
         res.status(200).send(slots);
     } catch (e) {
-        req.status(400).send(e)
+        res.status(400).send(e)
     }
 });
-
-router.post('user/:userId/bookSlot', protect, async(req, res) => {
+//checked
+router.post('/user/:userId/bookSlot', protect, async(req, res) => {
 
     const userId = req.params.userId;
-
-    const { distributerId, date, startTime } = req.body;
+    const { date, startTime } = req.body;
     try {
-        const slot = await Slot.find({ distributerId, date, startTime });
+        const user = await User.findOne({ uid: userId });
+
+        const distributerId = user.distributorId;
+        const distributer = await Distributer.findById({ _id: distributerId });
+        const distributerUid = distributer.uid;
+
+        const slot = await Slot.findOne({ distributerUid, date, startTime });
         slot.count--;
         await slot.save();
 
-
-        const user = await User.find({ userId });
-
-        const Booked = new Booked({
+        const booked = new Booked({
             userName: user.name,
             rationNum: user.rationNo,
-            distributerId,
+            distributerId: distributerUid,
             date,
             time: startTime,
         })
 
-        await Booked.save()
+        await booked.save()
+        res.status(201).send({ message: "successfully booked" })
 
     } catch (e) {
-
+        res.status(400).send(e)
     }
 });
 

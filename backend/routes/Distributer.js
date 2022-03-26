@@ -5,14 +5,15 @@ const { protect } = require("../Middleware/protect")
 const Distributer = require('../model/DistributerM');
 const Slot = require('../model/SlotM')
 const Booked = require("../model/bookedSlot")
-
+    //checked in postman
 router.get('/distributer/:distributerId/dashboard', protect, async(req, res) => {
 
     const distributerId = req.params.distributerId;
+    console.log(distributerId)
 
     try {
         const distributer = await Distributer.findOne({ uid: distributerId });
-
+        console.log(distributer);
         if (!distributer) {
             res.send({
                 message: "registrations is required"
@@ -25,7 +26,7 @@ router.get('/distributer/:distributerId/dashboard', protect, async(req, res) => 
         res.status(400).send(error);
     };
 });
-
+//checked in postman
 router.post('/distributer/:distributerId/register', protect, async(req, res) => {
 
     const distributerId = req.params.distributerId;
@@ -43,13 +44,14 @@ router.post('/distributer/:distributerId/register', protect, async(req, res) => 
         res.status(400).send(error);
     };
 });
-
-router.post('/:distributerId/createSlots', protect, async(req, res) => {
+//checked in postman
+router.post('/distributer/:distributerId/createSlots', protect, async(req, res) => {
 
     const distributerId = req.params.distributerId;
 
     const { date, startTime, endTime } = req.body;
     let time = startTime;
+    console.log()
 
     while (time < endTime) {
         const slot = new Slot({
@@ -67,7 +69,7 @@ router.post('/:distributerId/createSlots', protect, async(req, res) => {
     res.send({ message: "slots created" })
 });
 
-router.get('/:distributerId/activeSlots', protect, async(req, res) => {
+router.get('/distributer/:distributerId/activeBookedSlots', protect, async(req, res) => {
 
     const distributerId = req.params.distributerId;
 
@@ -77,10 +79,9 @@ router.get('/:distributerId/activeSlots', protect, async(req, res) => {
     } catch (error) {
         res.status(400).send(error);
     }
-
 });
 
-router.delete('/:distributerId/activeSlots/:slotId/markDone', protect, async(req, res) => {
+router.delete('/distributer/:distributerId/activeBookedSlots/:slotId/markDone', protect, async(req, res) => {
 
     const slotId = req.params.slotId;
 
