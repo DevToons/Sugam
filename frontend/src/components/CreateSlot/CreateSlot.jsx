@@ -5,9 +5,20 @@ import CalendarPicker from '@mui/lab/CalendarPicker';
 import TextField from '@mui/material/TextField';
 import TimePicker from '@mui/lab/TimePicker';
 import Button from '@mui/material/Button';
+import { UserContext } from "../../store/user";
+import { ReactComponent as Loading } from "../../assets/loading.svg";
 import './CreateSlot.css';
 
 const CreateSlot = () => {    
+
+    const [date, setDate] = React.useState(new Date());
+    const [startTime, setStartTime] = React.useState(null);
+    const [endTime, setEndTime] = React.useState(null);
+
+    const [isLoading, doneLoading] = React.useState(true);
+    const { user, dispatchUser } = React.useContext(UserContext);
+
+    const [ slots, setSlots ] = React.useState([]);
 
     /*
 
@@ -15,75 +26,135 @@ const CreateSlot = () => {
     
     */
 
-    const [date, setDate] = React.useState(new Date());
-    const [startTime, setStartTime] = React.useState(null);
-    const [endTime, setEndTime] = React.useState(null);
+    React.useEffect(async () => {
 
-    const handleSubmit = () => {
+        try {
+            const res = await fetch(`http://localhost:5000/distributer/${user.user.uid}/activeSlots`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + user.token.token,
+                },
+                mode: "cors",
+            });
+
+            const data = await res.json();
+
+            setSlots(data);
+
+            doneLoading(false);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }, []);
+
+    
+
+    const handleSubmit = async () => {
         console.log(date);
-        console.log(startTime.getHours(), startTime.getMinutes());
-        console.log(endTime.getHours(), endTime.getMinutes());
+        console.log(startTime.getTime());
+        console.log(endTime.getTime());
 
         /**
          * post request
          */
+
+         try {
+            const res = await fetch(`http://localhost:5000/distributer/${user.user.uid}/createSlots`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + user.token.token,
+                },
+                mode: "cors",
+                body : JSON.stringify({
+                    date,
+                    startTime: startTime.getTime(),
+                    endTime: endTime.getTime()
+                })
+            });
+
+            const data = await res.json();
+
+            console.log(data);
+
+            doneLoading(false);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const disableDates = (date) => {
-        return date.getTime()===new Date('Wed Mar 16 2022 00:00:00 GMT+0530').getTime();
+        const currentDate = date.getTime();
+
+        const slot = slots.find((slot) => (
+            slot.date.getTime()===currentDate
+        ));
+
+        return slot!==undefined;
     }
 
     return (
-        <div className="create-slot-box">
 
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <div className="row">
+        <>
+            {
+                isLoading ? <Loading /> :
 
-                    <div className="col-md-6">
-                        <CalendarPicker 
-                            shouldDisableDate={disableDates}
-                            className="create-slot-calendar"
-                            date={date} 
-                            onChange={(newDate) => setDate(newDate)}
-                        />
-                    </div>
+                <div className="create-slot-box">
 
-                    <div className="col-md-6">
-                        <TimePicker
-                            label="Start Time"
-                            value={startTime}
-                            onChange={(newValue) => {
-                                setStartTime(newValue);
-                            }}
-                            renderInput={(params) => <TextField 
-                                className="create-slot-time"
-                                size="small"
-                                {...params}
-                            />}
-                        />
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <div className="row">
 
-                        <TimePicker
-                            label="End Time"
-                            value={endTime}
-                            onChange={(newValue) => {
-                                setEndTime(newValue);
-                            }}
-                            renderInput={(params) => <TextField 
-                                className="create-slot-time"
-                                size="small"
-                                {...params}
-                            />}
-                        />
-                    </div>
+                            <div className="col-md-6">
+                                <CalendarPicker 
+                                    shouldDisableDate={disableDates}
+                                    className="create-slot-calendar"
+                                    date={date} 
+                                    onChange={(newDate) => setDate(newDate)}
+                                />
+                            </div>
+
+                            <div className="col-md-6">
+                                <TimePicker
+                                    label="Start Time"
+                                    value={startTime}
+                                    onChange={(newValue) => {
+                                        setStartTime(newValue);
+                                    }}
+                                    renderInput={(params) => <TextField 
+                                        className="create-slot-time"
+                                        size="small"
+                                        {...params}
+                                    />}
+                                />
+
+                                <TimePicker
+                                    label="End Time"
+                                    value={endTime}
+                                    onChange={(newValue) => {
+                                        setEndTime(newValue);
+                                    }}
+                                    renderInput={(params) => <TextField 
+                                        className="create-slot-time"
+                                        size="small"
+                                        {...params}
+                                    />}
+                                />
+                            </div>
+                        </div>
+                    </LocalizationProvider>
+
+                    <Button 
+                        className="create-slot-button"
+                        variant="contained" 
+                        onClick={handleSubmit}
+                    >Create</Button>
                 </div>
-            </LocalizationProvider>
-
-            <Button 
-                className="create-slot-button"
-                variant="contained" 
-                onClick={handleSubmit}
-            >Create</Button>
-        </div>
+            }
+        </>
     );
 }
 

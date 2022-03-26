@@ -1,15 +1,16 @@
 import React from "react";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
-import './SignUpPage.css';
+import './DistributorSignUpPage.css';
 import { OtpContext } from "../../store/otp";
 import { UserContext } from "../../store/user";
 import { otpReducer } from "../../reducer/otp";
 import SignUpBox from "../../components/SignUpBox/SignUpBox";
 import OtpBox from "../../components/OtpBox/OtpBox";
 import { storeUser } from "../../actions/user";
+import { useNavigate } from "react-router-dom";
 
-const SignUpPage = () => {
+const DistributorSignUpPage = () => {
 
     const { user, dispatchUser } = React.useContext(UserContext);
 
@@ -22,6 +23,8 @@ const SignUpPage = () => {
         code,
         dispatchCode
     }
+
+    const navigate=useNavigate();
 
     React.useEffect(() => {
 
@@ -58,6 +61,7 @@ const SignUpPage = () => {
         window.confirmationResult.confirm(code.otp)
             .then((result) => {
                 dispatchUser(storeUser(result.user));
+                navigate(`/distributor/${result.user.uid}/details`);
 
             }).catch((error) => {
                 console.log(error);
@@ -70,7 +74,7 @@ const SignUpPage = () => {
     return (
 
         <OtpContext.Provider value={provider}>
-            <div className="h-full py-16 px-4 signup-page">
+            <div className="signup-page">
                 {
                     code.phoneNo === null ? <SignUpBox /> : <OtpBox />
                 }
@@ -80,4 +84,4 @@ const SignUpPage = () => {
     );
 }
 
-export default SignUpPage;
+export default DistributorSignUpPage;

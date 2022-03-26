@@ -28,7 +28,7 @@ const ActiveSlotsPage = () => {
     React.useEffect(async () => {
 
         try {
-            const res = await fetch(`http://localhost:5000/distributer/${distributorId}/activeSlots`, {
+            const res = await fetch(`http://localhost:5000/distributer/${distributorId}/activeBookedSlots`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',

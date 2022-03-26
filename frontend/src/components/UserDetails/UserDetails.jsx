@@ -1,7 +1,11 @@
 import React from "react";
+import { UserDetailsContext } from "../../store/userDetails";
 import './UserDetails.css'
 
-const UserDetails = ({ details }) => {
+const UserDetails = () => {
+
+    const { userDetails } = React.useContext(UserDetailsContext);
+
     return (
         <div className="user-details-box">
 
@@ -9,8 +13,8 @@ const UserDetails = ({ details }) => {
 
                 <div className="col-md-6">
                     <img 
-                        src={details.image} 
-                        alt={details.name} 
+                        src={userDetails.image} 
+                        alt={userDetails.name} 
                         className="ration-card-img d-block mx-auto"
                      />
                 </div>
@@ -19,13 +23,13 @@ const UserDetails = ({ details }) => {
                     <h1>Ration Card Details</h1>
                     <div className="row">
                         <div className="col-6">Number:</div>
-                        <div className="col-6">{details.rationNo}</div>
+                        <div className="col-6">{userDetails.rationNo}</div>
                         <div className="col-6">Name:</div>
-                        <div className="col-6">{details.name}</div>
+                        <div className="col-6">{userDetails.name}</div>
                         <div className="col-6">City:</div>
-                        <div className="col-6">{details.city}</div>
+                        <div className="col-6">{userDetails.city}</div>
                         <div className="col-6">State:</div>
-                        <div className="col-6">{details.state}</div>
+                        <div className="col-6">{userDetails.state}</div>
                     </div>
 
                     <hr />
@@ -33,9 +37,9 @@ const UserDetails = ({ details }) => {
                     <h1>Distributor Details</h1>
                     <div className="row">
                         <div className="col-6">Number:</div>
-                        <div className="col-6">{details.distributorNo}</div>
+                        <div className="col-6">{userDetails.distributorNo}</div>
                         <div className="col-6">Name:</div>
-                        <div className="col-6">{details.distributorName}</div>
+                        <div className="col-6">{userDetails.distributorName}</div>
                     </div>
                 </div>
             </div>

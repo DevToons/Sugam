@@ -5,6 +5,8 @@ import axios from 'axios';
 import MenuItem from '@mui/material/MenuItem';
 import './UserRegistrationPage.css';
 import { UserContext } from "../../store/user";
+import { ReactComponent as Loading } from "../../assets/loading.svg";
+import { useNavigate } from "react-router-dom";
 
 const UserRegistrationPage = () => {
 
@@ -20,6 +22,9 @@ const UserRegistrationPage = () => {
     const [ authToken, setAuthToken ] = React.useState('');
     const [ states, setStates ] = React.useState([]);
     const [ cities, setCities ] = React.useState([]);
+    const [isLoading, doneLoading] = React.useState(true);
+
+    const navigate = useNavigate();
 
     React.useEffect(() => {
 
@@ -46,6 +51,7 @@ const UserRegistrationPage = () => {
             }
         }).then((data) => {
             setStates(data.data);
+            doneLoading(false);
         }).catch((error) => {
             console.log(error);
         });
@@ -84,7 +90,6 @@ const UserRegistrationPage = () => {
 
         console.log(details);
         
-        const data = details;
         try {
             const res = await fetch(`http://localhost:5000/user/${user.user.uid}/register`, {
                 method: 'POST',
@@ -102,7 +107,8 @@ const UserRegistrationPage = () => {
                 })
             });
 
-            console.log(res)
+            console.log(res.json());
+            navigate(`/user/${user.user.uid}/details`);
         } catch (e) {
             console.log(e)
         }
@@ -117,69 +123,73 @@ const UserRegistrationPage = () => {
 
     return (
         <>
-            <div className="registration-box">
+            {
+                isLoading ? <Loading /> : 
 
-                <h1>User Registration</h1>
-            
-                <TextField
-                    label="Enter Ration Card Number"
-                    size="small"
-                    name="rationNo"
-                    value={details.rationNo}
-                    onChange={handleChange}
-                    fullWidth
-                />
+                <div className="registration-box">
 
-                <TextField
-                    label="Enter Name"
-                    size="small"
-                    name="name"
-                    value={details.name}
-                    onChange={handleChange}
-                    fullWidth
-                />
+                    <h1>User Registration</h1>
+                
+                    <TextField
+                        label="Enter Ration Card Number"
+                        size="small"
+                        name="rationNo"
+                        value={details.rationNo}
+                        onChange={handleChange}
+                        fullWidth
+                    />
 
-                <TextField 
-                    label="Select State" 
-                    margin="dense"
-                    size="small"
-                    name="state"
-                    select
-                    fullWidth
-                    value={details.state} 
-                    onChange={handleChange}
-                >
-                    {
-                        states.map((state, index) => (
-                            <MenuItem key={index} value={state.state_name}>{state.state_name}</MenuItem>
-                        ))
-                    }
-                </TextField>
+                    <TextField
+                        label="Enter Name"
+                        size="small"
+                        name="name"
+                        value={details.name}
+                        onChange={handleChange}
+                        fullWidth
+                    />
 
-                <TextField 
-                    label="Select City" 
-                    margin="dense"
-                    size="small"
-                    name="city"
-                    select
-                    fullWidth
-                    value={details.city} 
-                    onChange={handleChange}
-                >
-                    {
-                        cities.map((city, index) => (
-                            <MenuItem key={index} value={city.city_name}>{city.city_name}</MenuItem>
-                        ))
-                    }
-                </TextField>
+                    <TextField 
+                        label="Select State" 
+                        margin="dense"
+                        size="small"
+                        name="state"
+                        select
+                        fullWidth
+                        value={details.state} 
+                        onChange={handleChange}
+                    >
+                        {
+                            states.map((state, index) => (
+                                <MenuItem key={index} value={state.state_name}>{state.state_name}</MenuItem>
+                            ))
+                        }
+                    </TextField>
 
-                <Button 
-                    variant="contained" 
-                    onClick={handleSubmit}
-                    fullWidth
-                >Verify & Proceed</Button>
+                    <TextField 
+                        label="Select City" 
+                        margin="dense"
+                        size="small"
+                        name="city"
+                        select
+                        fullWidth
+                        value={details.city} 
+                        onChange={handleChange}
+                    >
+                        {
+                            cities.map((city, index) => (
+                                <MenuItem key={index} value={city.city_name}>{city.city_name}</MenuItem>
+                            ))
+                        }
+                    </TextField>
 
-            </div>
+                    <Button 
+                        variant="contained" 
+                        onClick={handleSubmit}
+                        fullWidth
+                    >Verify & Proceed</Button>
+
+                </div>
+            }
         </>
     );
 }
