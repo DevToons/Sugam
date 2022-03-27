@@ -5,9 +5,18 @@ const slotSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    // date: {
+    //     type: String,
+    //     required: true
+    // },
     date: {
-        type: String,
-        required: true
+        type: Number
+    },
+    month: {
+        type: Number
+    },
+    year: {
+        type: Number
     },
     startTime: {
         type: Number,

@@ -6,7 +6,6 @@ const BookedSchema = mongoose.Schema({
     },
     rationNum: {
         type: String,
-        trim: true,
         required: true
     },
     distributerId: {
@@ -14,9 +13,13 @@ const BookedSchema = mongoose.Schema({
         required: true,
     },
     date: {
-        type: String,
-        trim: true,
-        required: true
+        type: Number
+    },
+    month: {
+        type: Number
+    },
+    year: {
+        type: Number
     },
     time: {
         type: Number,
