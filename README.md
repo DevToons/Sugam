@@ -1,4 +1,4 @@
-# Ion Hacakthon
+# Ion Hackathon
 
 ## Problem Statement
 
@@ -142,4 +142,19 @@ Start the project
 ```bash
 npm start
 ```
-After this the client start running at localhost:3000 and one can interact with the website
+After this the client start running at localhost:3000 and one can interact with the website.
+
+## Future Scope
+
+In the coming future, we can expect that the concept of a handy ration card will be completely digitalized and there will be no need to carry the cards each time while going to get the ration, just a receipt will be enough to get the ration from the store.
+
+We will provide the facility to create the digital ration cards via the Government officials who will do the verification process.
+
+## Team Members
+
+- [Harsh Jain](https://github.com/harshcoder690)
+- [Anshika Agrawal](https://github.com/AnshikaAgrawal5501)
+
+## Support
+
+Do support and give a star :star:
