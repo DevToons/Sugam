@@ -88,7 +88,6 @@ npm install
 To run this project, you will need to add the following environment variables. Create a ```config.env``` file in the root.
 
 `MONGODB_URL`<br>
-`PORT`<br>
 `MONGO`<br>
 `API_SECRET`<br>
 `VONAGE_API_KEY`<br>
