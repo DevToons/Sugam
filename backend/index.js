@@ -6,7 +6,7 @@ const cors = require('cors')
 const { protect } = require('../backend/Middleware/protect');
 const bodyParser = require('body-parser')
 const app = express();
-const PORT = 5000;
+const Port = process.env.PORT || 5000;
 
 require("dotenv").config();
 
@@ -19,6 +19,6 @@ app.use(userRouter);
 app.use(DistributerRouter);
 
 
-app.listen(PORT, () => {
-    console.log("server is connected on port 5000")
+app.listen(Port, () => {
+    console.log(`server is connected on port ${Port}/`)
 })

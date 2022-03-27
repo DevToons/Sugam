@@ -1,12 +1,12 @@
 {
-    "name": "Ion-backend",
+    "name": "backend",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "env-cmd ./config/dev.env nodemon src/index.js",
-        "start": "nodemon index.js"
+        "start": "node index.js"
     },
     "keywords": [],
     "author": "",
