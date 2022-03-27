@@ -7,7 +7,7 @@ import { UserContext } from "../../store/user";
 import { MarkDoneContext } from "../../store/markDone";
 import { setMarkDone } from "../../actions/markDone";
 
-const ActiveSlot = ({ distributorId, id, details, image, time, status }) => {
+const ActiveSlot = ({ id, details, image, time, status }) => {
 
     const { user, dispatchUser } = React.useContext(UserContext);
     
@@ -16,7 +16,7 @@ const ActiveSlot = ({ distributorId, id, details, image, time, status }) => {
 
          try {
              
-            const res = await fetch(`http://localhost:5000/distributer/${distributorId}/activeBookedSlots/${id}/markDone`, {
+            const res = await fetch(`http://localhost:5000/distributer/${user.user.id}/activeBookedSlots/${id}/markDone`, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
