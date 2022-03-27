@@ -15,7 +15,7 @@ const DistributorDetailsPage = () => {
 
     const [isLoading, doneLoading] = React.useState(true);
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     React.useEffect(async () => {
 
@@ -44,30 +44,31 @@ const DistributorDetailsPage = () => {
         }
     }, []);
 
-    
+
 
     return (
         <>
             {
-                isLoading ? <Loading /> : 
+                isLoading ? <Loading /> :
 
-                <>
-                    <DistributorDetails />
+                    <>
+                        <DistributorDetails />
+                            <Button
+                                className="details-button1"
+                                variant="contained"
+                                onClick={() => {
+                                    navigate(`/distributor/${user.user.uid}/activeSlots`)
+                                }}
+                            >Active Slots</Button>
 
-                    <Button 
-                        variant="contained" 
-                        onClick={() => {
-                            navigate(`/distributor/${user.user.uid}/activeSlots`)
-                        }}
-                    >Active Slots</Button>
-
-                    <Button 
-                        variant="contained" 
-                        onClick={() => {
-                            navigate(`/distributor/${user.user.uid}/createSlots`)
-                        }}
-                    >Create Slots</Button>
-                </>
+                            <Button
+                                className="details-button2"
+                                variant="contained"
+                                onClick={() => {
+                                    navigate(`/distributor/${user.user.uid}/createSlots`)
+                                }}
+                            >Create Slots</Button>
+                    </>
             }
         </>
     );

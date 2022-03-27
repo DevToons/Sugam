@@ -5,6 +5,7 @@ import CalendarPicker from '@mui/lab/CalendarPicker';
 import TextField from '@mui/material/TextField';
 import TimePicker from '@mui/lab/TimePicker';
 import Button from '@mui/material/Button';
+import moment from 'moment';
 import './BookSlot.css';
 import { UserContext } from "../../store/user";
 import { ReactComponent as Loading } from "../../assets/loading.svg";
@@ -96,7 +97,7 @@ const BookSlot = () => {
             });
             console.log(res)
             const data = await res.json();
-
+            alert("Slot Booked Successfully")
             console.log(data);
 
             dispatchBookedSlot(bookSlot({
@@ -146,8 +147,10 @@ const BookSlot = () => {
                                     timeSlots.map((slot, index) => (
                                         <div key={index} className="time-slot" onClick={() => {
                                             setTime(slot.startTime)
-                                        }} >
-                                            {slot.startTime}
+
+                                        }}
+                                         >
+                                             {moment(slot.startTime).format('LT')}
                                         </div>
                                     ))
                                 }

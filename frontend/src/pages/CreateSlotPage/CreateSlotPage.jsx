@@ -19,7 +19,7 @@ const CreateSlotPage = () => {
             {slots}
 
             <Button 
-                className="create-slot-button"
+                className="slot-button "
                 variant="contained" 
                 onClick={handleSubmit}
             >Add Slot</Button>

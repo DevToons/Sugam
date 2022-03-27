@@ -2,7 +2,8 @@
     width: 50%;
     margin: 30px auto;
     border: 1px solid black;
-    padding: 40px 50px;
+    padding: 25px 35px;
+    /* margin-right: 2rem !important; */
 }
 
 .book-slot-box .row>div:first-child {
@@ -24,6 +25,7 @@
     border: 2px solid grey;
     width: 100px;
     height: 40px;
+    /* margin-left: 2rem !important; */
     text-align: center;
     border-radius: 5px;
     padding: 5px 0;
@@ -41,4 +43,9 @@
     margin: 5px;
     cursor: pointer;
     background-color: blanchedalmond;
+}
+
+.create-slot-button {
+    background-color: black !important;
+    color: white !important;
 }

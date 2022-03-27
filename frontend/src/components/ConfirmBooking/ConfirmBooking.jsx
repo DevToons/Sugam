@@ -42,7 +42,7 @@ const ConfirmBooking = () => {
                     body
                 })
             });
-            
+
             console.log(res.json());
             // navigate(`/distributor/${user.user.uid}/details`);
         } catch (e) {
@@ -51,44 +51,46 @@ const ConfirmBooking = () => {
 
     }
     return (
-        <div className="confirm-booking-box">
-            <div className="row">
+        <div>
+            <div className="confirm-booking-box outcon">
+                <div className="row space-x-2">
+                    <div className="col-md-6">
+                        <div className="row">
+                            <div className="col-6">Ration Card no. :</div>
+                            <div className="col-6">{userDetails.rationNo}</div>
+                            <div className="col-6">Name :</div>
+                            <div className="col-6">{userDetails.name}</div>
+                            <div className="col-6">City :</div>
+                            <div className="col-6">{userDetails.city}</div>
+                            <div className="col-6">State :</div>
+                            <div className="col-6">{userDetails.state}</div>
+                        </div>
+                    </div>
 
-                <div className="col-md-6">
-                    <div className="row">
-                        <div className="col-6">Ration Card no. :</div>
-                        <div className="col-6">{userDetails.rationNo}</div>
-                        <div className="col-6">Name :</div>
-                        <div className="col-6">{userDetails.name}</div>
-                        <div className="col-6">City :</div>
-                        <div className="col-6">{userDetails.city}</div>
-                        <div className="col-6">State :</div>
-                        <div className="col-6">{userDetails.state}</div>
+                    <div className="col-md-6">
+                        <div className="row">
+                            <div className="col-6">Distributor Name :</div>
+                            <div className="col-6">{userDetails.distributorName}</div>
+                            <div className="col-6">Distributor no.:</div>
+                            <div className="col-6">{userDetails.distributorNo}</div>
+                        </div>
+                    </div>
+
+                    <div className="col-md-6">
+                        <div className="row">
+                            <div className="col-6">Date :</div>
+                            <div className="col-6">{date}</div>
+                            <div className="col-6">Time:</div>
+                            <div className="col-6">{time}</div>
+                        </div>
                     </div>
                 </div>
-
-                <div className="col-md-6">
-                    <div className="row">
-                        <div className="col-6">Distributor Name :</div>
-                        <div className="col-6">{userDetails.distributorName}</div>
-                        <div className="col-6">Distributor no.:</div>
-                        <div className="col-6">{userDetails.distributorNo}</div>
-                    </div>
-                </div>
-
-                <div className="col-md-6">
-                    <div className="row">
-                        <div className="col-6">Date :</div>
-                        <div className="col-6">{date}</div>
-                        <div className="col-6">Time:</div>
-                        <div className="col-6">{time}</div>
-                    </div>
-                </div>
-                <button onClick={reciptHandler}>
-                    Generate Recipt
-                </button>
             </div>
+            <button className="confirmBtn" onClick={reciptHandler}>
+                Generate Recipt
+            </button>
         </div>
+
     );
 }
 

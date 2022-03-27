@@ -79,7 +79,7 @@ const CreateSlot = () => {
             });
 
             const data = await res.json();
-
+            alert("Slot created")
             console.log(data);
 
             doneLoading(false);
@@ -120,7 +120,7 @@ const CreateSlot = () => {
                                 />
                             </div>
 
-                            <div className="col-md-6">
+                            <div className="col-md-6 timecon">
                                 <TimePicker
                                     label="Start Time"
                                     value={startTime}

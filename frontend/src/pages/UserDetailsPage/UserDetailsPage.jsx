@@ -56,6 +56,7 @@ const UserDetailsPage = () => {
                     <UserDetails />
 
                     <Button 
+                    className="details-button"
                         variant="contained" 
                         onClick={() => {
                             navigate(`/user/${user.user.uid}/bookSlot`)
