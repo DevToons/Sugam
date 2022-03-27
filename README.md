@@ -1,4 +1,4 @@
-# Ion Hacakthon
+# Ion Hackathon
 
 ## Problem Statement
 
