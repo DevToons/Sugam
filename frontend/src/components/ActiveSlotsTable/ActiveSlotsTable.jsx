@@ -21,7 +21,7 @@ const ActiveSlotsTable = () => {
     React.useEffect(async () => {
 
         try {
-            const res = await fetch(`http://localhost:5000/distributer/${user.user.id}/activeBookedSlots`, {
+            const res = await fetch(`http://localhost:5000/distributer/${user.user.uid}/activeBookedSlots`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -34,7 +34,6 @@ const ActiveSlotsTable = () => {
             const data = await res.json();
 
             setBookSlotData(data);
-            dispatchMarkDone(setMarkDone())
         } catch (error) {
             console.log(error);
         }

@@ -87,7 +87,7 @@ const UserRegistrationPage = () => {
     }
 
     const handleSubmit = async (e) => {
-
+        e.preventDefault();
         console.log(details);
 
         try {
@@ -202,29 +202,23 @@ const UserRegistrationPage = () => {
                                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border-2 border-gray-300 con4">
                                         <form
                                             className="space-y-6"
-                                            //   onSubmit={handleSubmit(onSubmit)}
-                                            method="POST"
                                         >
                                             <div className="field">
                                                 <label
-                                                    for="name"
+                                                    for="ration"
                                                     className="block text-sm font-medium text-gray-700"
                                                 >
                                                     Ration Card Number
                                                 </label>
-                                                <div className="mt-1">
-                                                    <input
-                                                        id="name"
-                                                        type="text"
-                                                        // {...register("name", { required: true })}
-                                                        autocomplete="name"
-                                                        required
-                                                        value={details.rationNo}
-                                                        onChange={handleChange}
-                                                        placeholder="Enter your Ration Number"
-                                                        className="appearance-none block w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                                    />
-                                                </div>
+                                                <TextField
+                                                    id="ration"
+                                                    label="Enter Ration Card Number"
+                                                    size="small"
+                                                    name="rationNo"
+                                                    value={details.rationNo}
+                                                    onChange={handleChange}
+                                                    fullWidth
+                                                />
                                             </div>
 
                                             <div className="field">
@@ -234,19 +228,15 @@ const UserRegistrationPage = () => {
                                                 >
                                                     Name
                                                 </label>
-                                                <div className="mt-1">
-                                                    <input
-                                                        id="name"
-                                                        type="text"
-                                                        // {...register("name", { required: true })}
-                                                        autocomplete="name"
-                                                        required
-                                                        value={details.state}
-                                                        onChange={handleChange}
-                                                        placeholder="Enter your name"
-                                                        className="appearance-none block w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                                    />
-                                                </div>
+                                                <TextField
+                                                    id="name"
+                                                    label="Enter Name"
+                                                    size="small"
+                                                    name="name"
+                                                    value={details.name}
+                                                    onChange={handleChange}
+                                                    fullWidth
+                                                />
                                             </div>
                                             <div className="field">
                                                 <label

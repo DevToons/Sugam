@@ -16,7 +16,7 @@ const ActiveSlot = ({ id, details, image, time, status }) => {
 
          try {
              
-            const res = await fetch(`http://localhost:5000/distributer/${user.user.id}/activeBookedSlots/${id}/markDone`, {
+            const res = await fetch(`http://localhost:5000/distributer/${user.user.uid}/activeBookedSlots/${id}/markDone`, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',

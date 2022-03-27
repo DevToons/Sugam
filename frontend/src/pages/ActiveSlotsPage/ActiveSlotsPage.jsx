@@ -1,8 +1,8 @@
 import React from "react";
 import './ActiveSlotsPage.css';
 import { MarkDoneContext } from "../../store/markDone";
-import { markDoneReducer } from "../../reducer/markDone";
 import ActiveSlotsTable from "../../components/ActiveSlotsTable/ActiveSlotsTable";
+import markDoneReducer from "../../reducer/markDone";
 
 const ActiveSlotsPage = () => {
 

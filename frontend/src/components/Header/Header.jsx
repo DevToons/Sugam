@@ -18,6 +18,9 @@ const Header = () => {
                 <Link to='/user/1/details'>Details(User)</Link>
             </div>
             <div className="mx-2">
+                <Link to='/distributor/1/details'>Details(distributor)</Link>
+            </div>
+            <div className="mx-2">
                 <Link to='/distributor/1/register'>Register(Distributor)</Link>
             </div>
             {/* <div className="mx-2" >
