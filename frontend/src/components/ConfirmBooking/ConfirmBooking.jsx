@@ -29,7 +29,7 @@ const ConfirmBooking = () => {
         Time : ${time}
         `
         try {
-            const res = await fetch(`http://localhost:5000/user/${user.user.uid}/generateReceipt`, {
+            const res = await fetch(`https://sugam-backend.herokuapp.com/user/${user.user.uid}/generateReceipt`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',

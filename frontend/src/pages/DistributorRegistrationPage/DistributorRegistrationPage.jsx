@@ -91,7 +91,7 @@ const DistributorRegistrationPage = () => {
         console.log(details);
 
         try {
-            const res = await fetch(`http://localhost:5000/distributer/${user.user.uid}/register`, {
+            const res = await fetch(`https://sugam-backend.herokuapp.com/distributer/${user.user.uid}/register`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',

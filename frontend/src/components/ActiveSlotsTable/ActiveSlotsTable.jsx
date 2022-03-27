@@ -21,7 +21,7 @@ const ActiveSlotsTable = () => {
     React.useEffect(async () => {
 
         try {
-            const res = await fetch(`http://localhost:5000/distributer/${user.user.uid}/activeBookedSlots`, {
+            const res = await fetch(`https://sugam-backend.herokuapp.com/distributer/${user.user.uid}/activeBookedSlots`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',

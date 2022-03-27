@@ -29,7 +29,7 @@ const CreateSlot = () => {
     React.useEffect(async () => {
 
         try {
-            const res = await fetch(`http://localhost:5000/distributer/${user.user.uid}/activeSlots`, {
+            const res = await fetch(`https://sugam-backend.herokuapp.com/distributer/${user.user.uid}/activeSlots`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -61,7 +61,7 @@ const CreateSlot = () => {
          */
 
          try {
-            const res = await fetch(`http://localhost:5000/distributer/${user.user.uid}/createSlots`, {
+            const res = await fetch(`https://sugam-backend.herokuapp.com/distributer/${user.user.uid}/createSlots`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',

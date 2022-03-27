@@ -32,7 +32,7 @@ const BookSlot = () => {
     React.useEffect(async () => {
 
         try {
-            const res = await fetch(`http://localhost:5000/user/${user.user.uid}/getSlots`, {
+            const res = await fetch(`https://sugam-backend.herokuapp.com/user/${user.user.uid}/getSlots`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -80,7 +80,7 @@ const BookSlot = () => {
         console.log(date, time);
 
         try {
-            const res = await fetch(`http://localhost:5000/user/${user.user.uid}/bookSlot`, {
+            const res = await fetch(`https://sugam-backend.herokuapp.com/user/${user.user.uid}/bookSlot`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
