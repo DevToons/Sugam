@@ -7,10 +7,14 @@ const Distributer = require("../model/DistributerM");
 const Slot = require("../model/SlotM")
 const User = require('../model/userM');
 
-const client = require('twilio')(
-    process.env.TWILIO_ACCOUNT_SID,
-    process.env.TWILIO_AUTH_TOKEN
-);
+require("dotenv").config();
+
+const Vonage = require('@vonage/server-sdk')
+
+const vonage = new Vonage({
+    apiKey: process.env.VONAGE_API_KEY,
+    apiSecret: process.env.API_SECRET
+})
 
 //dashboard
 router.get('/user/:userId/dashboard', protect, async(req, res) => {
@@ -116,21 +120,37 @@ router.post('/user/:userId/bookSlot', protect, async(req, res) => {
 });
 
 router.post("/user/:userId/generateReceipt", protect, async(req, res) => {
-    res.header('Content-Type', 'application/json');
-    console.log(req.body);
-    client.messages
-        .create({
-            from: process.env.TWILIO_PHONE_NUMBER,
-            to: req.body.to,
-            body: req.body.body
-        })
-        .then(() => {
-            res.send(JSON.stringify({ success: true }));
-        })
-        .catch(err => {
+    // res.header('Content-Type', 'application/json');
+    // console.log(req.body);
+    // client.messages
+    //     .create({
+    //         from: process.env.TWILIO_PHONE_NUMBER,
+    //         to: req.body.to,
+    //         body: req.body.body
+    //     })
+    //     .then(() => {
+    //         res.send(JSON.stringify({ success: true }));
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //         res.send(JSON.stringify({ success: false }));
+    //     });
+
+    const from = "+918882158330"
+    const to = req.body.to;
+    const text = req.body.body;
+
+    vonage.message.sendSms(from, to, text, (err, responseData) => {
+        if (err) {
             console.log(err);
-            res.send(JSON.stringify({ success: false }));
-        });
+        } else {
+            if (responseData.messages[0]['status'] === "0") {
+                console.log("Message sent successfully.");
+            } else {
+                console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`);
+            }
+        }
+    })
 })
 
 module.exports = router;
