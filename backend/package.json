@@ -4,8 +4,8 @@
     "description": "",
     "main": "index.js",
     "engines": {
-        "npm": "16.14.2",
-        "node": "6.11.1"
+        "npm": "6.14.14",
+        "node": "14.17.5"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
