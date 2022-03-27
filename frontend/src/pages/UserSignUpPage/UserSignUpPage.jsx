@@ -75,7 +75,7 @@ const UserSignUpPage = () => {
         <OtpContext.Provider value={provider}>
             <div className="h-full py-16 px-4 signup-page">
                 {
-                    code.phoneNo === null ? <SignUpBox /> : <OtpBox />
+                    code.phoneNo === null ? <SignUpBox type = "User"/> : <OtpBox type = "User" number ={`${code.phoneNo}`}/>
                 }
                 <div id="recaptcha-container"></div>
             </div>

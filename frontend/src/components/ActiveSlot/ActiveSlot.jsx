@@ -4,16 +4,19 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import { UserContext } from "../../store/user";
+import { MarkDoneContext } from "../../store/markDone";
+import { setMarkDone } from "../../actions/markDone";
 
 const ActiveSlot = ({ distributorId, id, details, image, time, status }) => {
 
     const { user, dispatchUser } = React.useContext(UserContext);
-
+    
+    const { markDone, dispatchMarkDone } = React.useContext(MarkDoneContext);
     const handleChange = async () => {
 
          try {
              
-            const res = await fetch(`http://localhost:5000/distributer/${distributorId}/activeSlots/${id}/markDone`, {
+            const res = await fetch(`http://localhost:5000/distributer/${distributorId}/activeBookedSlots/${id}/markDone`, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -22,7 +25,8 @@ const ActiveSlot = ({ distributorId, id, details, image, time, status }) => {
                 },
                 mode: "cors",
             });
-            
+            console.log(res.json());
+            dispatchMarkDone(setMarkDone())
         } catch (error) {
             console.log(error);
         }

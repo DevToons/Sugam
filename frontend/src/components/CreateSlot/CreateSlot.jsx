@@ -40,7 +40,7 @@ const CreateSlot = () => {
             });
 
             const data = await res.json();
-
+            console.log(data)
             setSlots(data);
 
             doneLoading(false);
@@ -53,10 +53,9 @@ const CreateSlot = () => {
     
 
     const handleSubmit = async () => {
-        console.log(date);
-        console.log(startTime.getTime());
-        console.log(endTime.getTime());
-
+        // const tempDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+        // console.log(tempDate)
+        
         /**
          * post request
          */
@@ -71,7 +70,9 @@ const CreateSlot = () => {
                 },
                 mode: "cors",
                 body : JSON.stringify({
-                    date,
+                    date: date.getDate(),
+                    month : date.getMonth(),
+                    year : date.getFullYear(),
                     startTime: startTime.getTime(),
                     endTime: endTime.getTime()
                 })
@@ -89,14 +90,16 @@ const CreateSlot = () => {
 
     const disableDates = (date) => {
         const currentDate = date.getTime();
+        // console.log(date)
 
-        const slot = slots.find((slot) => (
-            slot.date.getTime()===currentDate
-        ));
-
+        const slot = slots.find((slot) => {
+            console.log(new Date(slot.date).getTime(),date.getTime())
+            return new Date(slot.date).getTime()===currentDate
+        });
+        // console.log(slot)
         return slot!==undefined;
     }
-
+    console.log(slots)
     return (
 
         <>

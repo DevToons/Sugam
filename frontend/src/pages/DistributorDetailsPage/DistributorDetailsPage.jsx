@@ -6,6 +6,7 @@ import './DistributorDetailsPage.css';
 import { UserContext } from "../../store/user";
 import { DistributerDetailsContext } from "../../store/distributorDetails";
 import { ReactComponent as Loading } from "../../assets/loading.svg";
+import { setDistributorDetails } from "../../actions/distributorDetails";
 
 const DistributorDetailsPage = () => {
 
@@ -35,7 +36,7 @@ const DistributorDetailsPage = () => {
                 navigate(`/distributor/${user.user.uid}/register`);
             }
 
-            dispatchDistributorDetails(data);
+            dispatchDistributorDetails(setDistributorDetails(data));
 
             doneLoading(false);
         } catch (error) {

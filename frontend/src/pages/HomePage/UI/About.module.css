@@ -1,0 +1,32 @@
+.card1 {
+    margin-left: 6rem !important;
+    margin-right: 3rem !important;
+    margin-top: 4rem !important;
+    margin-bottom: 4rem !important;
+}
+
+.card2 {
+    margin-left: 2.5rem !important;
+    margin-right: 3rem !important;
+    margin-top: 4rem !important;
+    margin-bottom: 4rem !important;
+}
+
+.card3 {
+    margin-left: 3rem !important;
+    margin-right: 6rem !important;
+    margin-top: 4rem !important;
+    margin-bottom: 4rem !important;
+}
+
+.head-text {
+    color: rgb(0 0 0/var(--tw-text-opacity)) !important;
+    line-height: 1.5rem !important;
+    font-weight: 800 !important;
+    font-size: 1.5rem !important;
+    margin-bottom: 3rem!important;
+    text-align: center !important;
+    margin-left: 5rem !important;
+    font-family: 'Sofia Pro', sans-serif !important;
+    margin-top: 3rem!important;
+}

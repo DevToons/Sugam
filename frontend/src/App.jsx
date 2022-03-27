@@ -14,9 +14,25 @@ import { UserDetailsContext } from "./store/userDetails";
 
 const App = () => {
 
-    const [ user, dispatchUser ] = React.useReducer(userReducer,null);
-    const [ userDetails, dispatchUserDetails ] = React.useReducer(userDetailsReducer, null);
-    const [ distributorDetails, dispatchDistributorDetails ] = React.useReducer(distributorDetailsReducer, null);
+    const [user, dispatchUser] = React.useReducer(userReducer, null);
+    const [userDetails, dispatchUserDetails] = React.useReducer(userDetailsReducer, {
+        state: "",
+        name: "",
+        rationNo: "",
+        city: "",
+        image: "",
+        uid: "",
+        distributorName: "",
+        distributorNo: ""
+    });
+    const [distributorDetails, dispatchDistributorDetails] = React.useReducer(distributorDetailsReducer, {
+        city: "",
+        image: "",
+        name: "",
+        number: "",
+        state: "",
+        uid: "",
+    });
 
     const userProvider = {
         user,
@@ -31,10 +47,10 @@ const App = () => {
         dispatchDistributorDetails
     };
 
-    React.useEffect(()=>{
-        auth.onAuthStateChanged((user)=>{
-        
-            getIdTokenResult(user).then((token)=>{
+    React.useEffect(() => {
+        auth.onAuthStateChanged((user) => {
+
+            getIdTokenResult(user).then((token) => {
                 console.log(token);
                 dispatchUser(storeToken(token));
             });
@@ -42,12 +58,11 @@ const App = () => {
     }, []);
 
     return (
-        
+
         <UserContext.Provider value={userProvider}>
             <DistributerDetailsContext.Provider value={distributorDetailsProvider}>
                 <UserDetailsContext.Provider value={userDetailsProvider}>
                     <BrowserRouter>
-                        <h1>Sugam</h1>
                         <Header />
                         <Routing />
                     </BrowserRouter>

@@ -10,6 +10,9 @@ import moment from 'moment';
 import ActiveSlot from "../../components/ActiveSlot/ActiveSlot";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../store/user";
+import { MarkDoneContext } from "../../store/markDone";
+import { markDoneReducer } from "../../reducer/markDone";
+import { setMarkDone } from "../../actions/markDone";
 
 const ActiveSlotsPage = () => {
 
@@ -17,13 +20,20 @@ const ActiveSlotsPage = () => {
 
     const { distributorId } = useParams();
 
-/**
- * 
- *  get request that will fetch all the active slots from for this particular distributor
- * 
- */
+    const [markDone, dispatchMarkDone] = React.useReducer(markDoneReducer, true);
 
-    const [ bookSlotData, setBookSlotData ] = React.useState([]);
+    const provider = {
+        markDone,
+        dispatchMarkDone
+    }
+
+    /**
+     * 
+     *  get request that will fetch all the active slots from for this particular distributor
+     * 
+     */
+
+    const [bookSlotData, setBookSlotData] = React.useState([]);
 
     React.useEffect(async () => {
 
@@ -41,57 +51,60 @@ const ActiveSlotsPage = () => {
             const data = await res.json();
 
             setBookSlotData(data);
+            dispatchMarkDone(setMarkDone())
         } catch (error) {
             console.log(error);
         }
 
-    }, []);
+    }, [markDone]);
 
     return (
-        <div className="active-slot-page">
+        <MarkDoneContext.Provider value={provider}>
+            <div className="active-slot-page">
 
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
 
-                    <TableHead>
-                        <ActiveSlot
-                            id="Slot Id"
-                            details="User Details"
-                            image="User Image"
-                            time="Slot time"
-                            status="Status"
-                         />
-                    </TableHead>
+                        <TableHead>
+                            <ActiveSlot
+                                id="Slot Id"
+                                details="User Details"
+                                image="User Image"
+                                time="Slot time"
+                                status="Status"
+                            />
+                        </TableHead>
 
-                    <TableBody>
-                        {
-                            bookSlotData.map((slot, index) => (
-                                <ActiveSlot
-                                    key={index}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    distributorId={distributorId}
-                                    id={slot.id}
-                                    details={`
+                        <TableBody>
+                            {
+                                bookSlotData.map((slot, index) => (
+                                    <ActiveSlot
+                                        key={index}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        distributorId={distributorId}
+                                        id={slot._id}
+                                        details={`
                                         Name: ${slot.userName}
                                         Ration No.: ${slot.rationNum}
                                     `}
-                                    image={
-                                        <img 
-                                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fA%3D%3D&w=1000&q=80" 
-                                        alt=""
-                                        />
-                                    }
-                                    time={`
-                                        Date: ${moment(new Date(slot.date).getTime()).format('MMMM Do YYYY')}
-                                        Time: ${slot.time.hour} : ${slot.time.minutes}
+                                        image={
+                                            <img
+                                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+                                                alt=""
+                                            />
+                                        }
+                                        time={`
+                                        Date: ${moment(new Date(slot.year, slot.month, slot.date).getTime()).format('MMMM Do YYYY')}
+                                        Time: ${moment(slot.time).format('LT')}
                                     `}
-                                />
-                            ))
-                        }
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </div>
+                                    />
+                                ))
+                            }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        </MarkDoneContext.Provider>
     );
 }
 

@@ -42,7 +42,7 @@ const BookSlot = () => {
             });
 
             const data = await res.json();
-
+            console.log(data)
             setSlots(data);
 
             doneLoading(false);
@@ -53,9 +53,16 @@ const BookSlot = () => {
 
     React.useEffect(() => {
 
-        const temp = slots.filter((slot) => (
-            slot.date.getTime()===date.getTime()
-        ));
+        const day = new Date(date).getDate();
+        const month = new Date(date).getMonth();
+        const year = new Date(date).getFullYear();
+        
+
+        const temp = slots.filter((slot) => {
+            // const tempDate = new Date(slot.date)
+            return day===slot.date && month===slot.month && year===slot.year
+            // new Date(slot.date).getTime()===new Date(date).getTime()
+        });
 
         setTimeSlots(temp);
 
@@ -64,6 +71,7 @@ const BookSlot = () => {
     
 
     const onSelectDate = (newDate) => {
+        console.log(newDate)
         setDate(newDate)
     }
 
@@ -80,16 +88,23 @@ const BookSlot = () => {
                 },
                 mode: "cors",
                 body : JSON.stringify({
-                    date,
+                    date : date.getDate(),
+                    month : date.getMonth(),
+                    year : date.getFullYear(),
                     startTime: time
                 })
             });
-
+            console.log(res)
             const data = await res.json();
 
             console.log(data);
 
-            dispatchBookedSlot(bookSlot({ date, startTime: time}));
+            dispatchBookedSlot(bookSlot({
+                date : date.getDate(),
+                month : date.getMonth(),
+                year : date.getFullYear(),
+                startTime: time
+            }));
         } catch (error) {
             console.log(error);
         }
@@ -99,9 +114,9 @@ const BookSlot = () => {
     const disableDates = (date) => {
         const currentDate = date.getTime();
 
-        const slot = slots.find((slot) => (
-            slot.date.getTime()===currentDate && slot.count!==0
-        ));
+        const slot = slots.find((slot) => {
+            return new Date(slot.date).getTime()===currentDate && slot.count!==0
+        });
 
         return slot===undefined;
     }
@@ -118,7 +133,7 @@ const BookSlot = () => {
 
                             <div className="col-md-6">
                                 <CalendarPicker 
-                                    shouldDisableDate={disableDates}
+                                    // shouldDisableDate={disableDates}
                                     className="create-slot-calendar"
                                     date={date} 
                                     onChange={onSelectDate}

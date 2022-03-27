@@ -7,11 +7,13 @@ import { UserContext } from "../../store/user";
 import './UserDetailsPage.css';
 import { UserDetailsContext } from "../../store/userDetails";
 import { ReactComponent as Loading } from "../../assets/loading.svg";
+import { setDistributorDetails } from "../../actions/distributorDetails";
+import {setUserDetails} from "../../actions/userDetails"
 
 const UserDetailsPage = () => {
 
     const { user } = React.useContext(UserContext);
-    const { dispatchUserDetails } = React.useContext(UserDetailsContext);
+    const { dispatchUserDetails,userDetails } = React.useContext(UserDetailsContext);
 
     const [isLoading, doneLoading] = React.useState(true);
 
@@ -20,7 +22,7 @@ const UserDetailsPage = () => {
     React.useEffect(async () => {
 
         try {
-            const res = await fetch(`http://localhost:5000/distributer/${user.user.uid}/dashboard`, {
+            const res = await fetch(`http://localhost:5000/user/${user.user.uid}/dashboard`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -31,25 +33,26 @@ const UserDetailsPage = () => {
             });
 
             const data = await res.json();
+            console.log(data)
 
             if (data.message) {
                 navigate(`/user/${user.user.uid}/register`);
             }
 
-            dispatchUserDetails(data);
+            dispatchUserDetails(setUserDetails(data));
 
             doneLoading(false);
         } catch (error) {
             console.log(error);
         }
     }, []);
-
+    console.log(userDetails)
     return (
         <>
             {
                 isLoading ? <Loading /> : 
 
-                <>
+                <div className="userbody">
                     <UserDetails />
 
                     <Button 
@@ -58,7 +61,7 @@ const UserDetailsPage = () => {
                             navigate(`/user/${user.user.uid}/bookSlot`)
                         }}
                     >Book Slot</Button>
-                </>
+                </div>
             }
         </>
     );

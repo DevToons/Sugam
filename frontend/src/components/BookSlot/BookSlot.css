@@ -30,3 +30,15 @@
     margin: 5px;
     cursor: pointer;
 }
+
+.time-slot:hover {
+    border: 2px solid grey;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    margin: 5px;
+    cursor: pointer;
+    background-color: blanchedalmond;
+}

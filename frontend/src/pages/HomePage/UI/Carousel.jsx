@@ -7,7 +7,7 @@ import styles from './Car.module.css';
 export const Carousel1 = () => {
     return (
         <div classname={`h-full ${styles.body} mx-2`}>
-            <Carousel fade>
+            <Carousel  controls={false} fade>
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
@@ -16,8 +16,12 @@ export const Carousel1 = () => {
                         classname="h-full"
                     />
                     <Carousel.Caption>
-                        <h3 className="px-10">First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <h3 className={`px-10 ${styles.header}`}>Sugam</h3>
+                        <p className={styles.sub_heading}>Collect Ration With Ease</p>
+                        <p className={styles.sub_heading2}>The dates on which the ration packages are available will be visible on the portal itself. According to those dates, the ration cardholders of your family can book a slot so that you can collect their ration packages and face no difficulty in doing so. </p>
+                        <button className={styles.btn}>
+                            Get Started
+                        </button>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -29,8 +33,12 @@ export const Carousel1 = () => {
                     />
 
                     <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h3 className={`px-10 ${styles.header}`}>Sugam</h3>
+                        <p className={styles.sub_heading}>Collect Ration With Ease</p>
+                        <p className={styles.sub_heading2}>The dates on which the ration packages are available will be visible on the portal itself. According to those dates, the ration cardholders of your family can book a slot so that you can collect their ration packages and face no difficulty in doing so. </p>
+                        <button className={styles.btn}>
+                            Get Started
+                        </button>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -42,8 +50,12 @@ export const Carousel1 = () => {
                     />
 
                     <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        <h3 className={`px-10 ${styles.header}`}>Sugam</h3>
+                        <p className={styles.sub_heading}>Collect Ration With Ease</p>
+                        <p className={styles.sub_heading2}>The dates on which the ration packages are available will be visible on the portal itself. According to those dates, the ration cardholders of your family can book a slot so that you can collect their ration packages and face no difficulty in doing so. </p>
+                        <button className={styles.btn}>
+                            Get Started
+                        </button>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
