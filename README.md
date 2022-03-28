@@ -57,7 +57,7 @@ git clone https://github.com/<your_user_name>/Sugam.git
 
 3. Navigate to the cloned repository.
 ```bash
-cd hack4women
+cd Sugam
 ```
 
 ### Prerequisite
