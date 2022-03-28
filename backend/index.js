@@ -3,7 +3,7 @@ require("./db/mongoose")
 const userRouter = require('./routes/user');
 const DistributerRouter = require('./routes/Distributer');
 const cors = require('cors')
-const { protect } = require('../backend/Middleware/protect');
+const { protect } = require('./Middleware/protect');
 const bodyParser = require('body-parser')
 const app = express();
 const Port = process.env.PORT || 5000;
