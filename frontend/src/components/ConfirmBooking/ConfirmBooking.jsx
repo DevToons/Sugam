@@ -5,17 +5,19 @@ import { SlotContext } from "../../store/slot";
 import { UserContext } from "../../store/user";
 import moment from 'moment';
 import { UserDetailsContext } from "../../store/userDetails";
+import { toast, ToastContainer } from 'react-toastify';
 
 const ConfirmBooking = () => {
 
     const { bookedSlot, dispatchBookedSlot } = React.useContext(SlotContext);
-    // const { user, dispatchUser } = React.useContext(UserContext);
     const { user, dispatchUser } = React.useContext(UserContext);
     const { userDetails, dispatchUserDetails } = React.useContext(UserDetailsContext);
+
     const date = moment(new Date(bookedSlot.year, bookedSlot.month, bookedSlot.date).getTime()).format('MMMM Do YYYY')
     const time = moment(bookedSlot.startTime).format('LT')
 
     const reciptHandler = async (e) => {
+        
         const to = user.user.phoneNumber;
         const body = `
         Slot booked successfully!
@@ -44,9 +46,31 @@ const ConfirmBooking = () => {
             });
 
             console.log(res.json());
-            // navigate(`/distributor/${user.user.uid}/details`);
+
+            toast.success("Receipt sent to phone.", {
+                position: toast.POSITION.BOTTOM_LEFT,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'colored'
+            });
+
         } catch (e) {
-            console.log(e)
+            console.log(e);
+
+            toast.error("Error! Try Again.", {
+                position: toast.POSITION.BOTTOM_LEFT,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'colored'
+            });
         }
 
     }
@@ -89,6 +113,9 @@ const ConfirmBooking = () => {
             <button className="confirmBtn" onClick={reciptHandler}>
                 Generate Recipt
             </button>
+
+            <ToastContainer />
+            
         </div>
 
     );

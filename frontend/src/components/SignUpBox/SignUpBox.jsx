@@ -18,7 +18,7 @@ const SignUpBox = (props) => {
 
   const handleSubmit = (e) => {
 
-    if (phoneNo.length !== 13) {
+    if (phoneNo.length !== 10) {
       return;
     }
 

@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import { MarkDoneContext } from "../../store/markDone";
 import { setMarkDone } from "../../actions/markDone";
 import { UserContext } from "../../store/user";
+import { ReactComponent as Loading } from "../../assets/loading.svg";
 
 const ActiveSlotsTable = () => {
 
@@ -17,6 +18,7 @@ const ActiveSlotsTable = () => {
     const { user, dispatchUser } = React.useContext(UserContext);
 
     const [bookSlotData, setBookSlotData] = React.useState([]);
+    const [isLoading, doneLoading] = React.useState(true);
 
     React.useEffect(async () => {
 
@@ -34,6 +36,8 @@ const ActiveSlotsTable = () => {
             const data = await res.json();
 
             setBookSlotData(data);
+
+            doneLoading(false);
         } catch (error) {
             console.log(error);
         }
@@ -41,46 +45,52 @@ const ActiveSlotsTable = () => {
     }, [markDone]);
 
     return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <>
+            {
+                isLoading ? <Loading /> : 
 
-                <TableHead>
-                    <ActiveSlot
-                        id="Slot Id"
-                        details="User Details"
-                        image="User Image"
-                        time="Slot time"
-                        status="Status"
-                    />
-                </TableHead>
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
 
-                <TableBody>
-                    {
-                        bookSlotData.map((slot, index) => (
+                        <TableHead>
                             <ActiveSlot
-                                key={index}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                id={slot._id}
-                                details={`
-                                Name: ${slot.userName}
-                                Ration No.: ${slot.rationNum}
-                            `}
-                                image={
-                                    <img
-                                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-                                        alt=""
-                                    />
-                                }
-                                time={`
-                                Date: ${moment(new Date(slot.year, slot.month, slot.date).getTime()).format('MMMM Do YYYY')}
-                                Time: ${moment(slot.time).format('LT')}
-                            `}
+                                id="Slot Id"
+                                details="User Details"
+                                image="User Image"
+                                time="Slot time"
+                                status="Status"
                             />
-                        ))
-                    }
-                </TableBody>
-            </Table>
-        </TableContainer>
+                        </TableHead>
+
+                        <TableBody>
+                            {
+                                bookSlotData.map((slot, index) => (
+                                    <ActiveSlot
+                                        key={index}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        id={slot._id}
+                                        details={`
+                                        Name: ${slot.userName}
+                                        Ration No.: ${slot.rationNum}
+                                    `}
+                                        image={
+                                            <img
+                                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+                                                alt=""
+                                            />
+                                        }
+                                        time={`
+                                        Date: ${moment(new Date(slot.year, slot.month, slot.date).getTime()).format('MMMM Do YYYY')}
+                                        Time: ${moment(slot.time).format('LT')}
+                                    `}
+                                    />
+                                ))
+                            }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            }
+        </>
     );
 };
 

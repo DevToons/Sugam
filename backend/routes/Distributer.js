@@ -50,7 +50,12 @@ router.post('/distributer/:distributerId/createSlots', protect, async(req, res) 
     const distributerId = req.params.distributerId;
 
     const { date, month, year, startTime, endTime } = req.body;
+
     console.log(req.body)
+
+    if (startTime >= endTime) {
+        res.status(400).send(e)
+    }
     let time = startTime;
     // const tempDate = new Date(new Date(date).getTime() + 24 * 3600000);
     try {

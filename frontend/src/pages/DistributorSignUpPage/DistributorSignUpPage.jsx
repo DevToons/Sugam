@@ -9,6 +9,8 @@ import SignUpBox from "../../components/SignUpBox/SignUpBox";
 import OtpBox from "../../components/OtpBox/OtpBox";
 import { storeUser } from "../../actions/user";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import { storePhoneNo } from "../../actions/otp";
 
 const DistributorSignUpPage = () => {
 
@@ -41,7 +43,7 @@ const DistributorSignUpPage = () => {
         let appVerifier = window.recaptchaVerifier;
         console.log(code.phoneNo)
 
-        signInWithPhoneNumber(auth, code.phoneNo, appVerifier)
+        signInWithPhoneNumber(auth, `+91${code.phoneNo}`, appVerifier)
         .then((confirmationResult) => {
 
             window.confirmationResult=confirmationResult;
@@ -65,6 +67,19 @@ const DistributorSignUpPage = () => {
 
             }).catch((error) => {
                 console.log(error);
+
+                toast.error("Error! Try Again.", {
+                    position: toast.POSITION.BOTTOM_LEFT,
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'colored'
+                });
+
+                dispatchCode(storePhoneNo(null));
             })
 
     }, [code.otp]);
@@ -76,9 +91,10 @@ const DistributorSignUpPage = () => {
         <OtpContext.Provider value={provider}>
             <div className="signup-page">
                 {
-                    code.phoneNo === null ? <SignUpBox type = "Distributer"/> : <OtpBox type = "Distributer" number ={`${code.phoneNo}`}/>
+                    code.phoneNo === null ? <SignUpBox type = "Distributer"/> : <OtpBox type = "Distributer" number ={`+91${code.phoneNo}`}/>
                 }
                 <div id="recaptcha-container"></div>
+                <ToastContainer />
             </div>
         </OtpContext.Provider>
     );

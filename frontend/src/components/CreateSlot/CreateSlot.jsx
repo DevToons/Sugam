@@ -7,6 +7,7 @@ import TimePicker from '@mui/lab/TimePicker';
 import Button from '@mui/material/Button';
 import { UserContext } from "../../store/user";
 import { ReactComponent as Loading } from "../../assets/loading.svg";
+import { toast, ToastContainer } from 'react-toastify';
 import './CreateSlot.css';
 
 const CreateSlot = () => {    
@@ -19,12 +20,6 @@ const CreateSlot = () => {
     const { user, dispatchUser } = React.useContext(UserContext);
 
     const [ slots, setSlots ] = React.useState([]);
-
-    /*
-
-    a get request that will fetch the slots created by this distributor so that we can disable those dates in this component
-    
-    */
 
     React.useEffect(async () => {
 
@@ -53,12 +48,6 @@ const CreateSlot = () => {
     
 
     const handleSubmit = async () => {
-        // const tempDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
-        // console.log(tempDate)
-        
-        /**
-         * post request
-         */
 
          try {
             const res = await fetch(`https://sugam-backend.herokuapp.com/distributer/${user.user.uid}/createSlots`, {
@@ -79,27 +68,48 @@ const CreateSlot = () => {
             });
 
             const data = await res.json();
-            alert("Slot created")
             console.log(data);
 
-            doneLoading(false);
+            toast.success("Successfully created!", {
+                position: toast.POSITION.BOTTOM_LEFT,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'colored'
+            });
+
         } catch (error) {
             console.log(error);
+
+            toast.error("Error! Try Again.", {
+                position: toast.POSITION.BOTTOM_LEFT,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'colored'
+            });
         }
     }
 
     const disableDates = (date) => {
-        const currentDate = date.getTime();
-        // console.log(date)
 
-        const slot = slots.find((slot) => {
-            console.log(new Date(slot.date).getTime(),date.getTime())
-            return new Date(slot.date).getTime()===currentDate
-        });
-        // console.log(slot)
+        const currentDate = date.getDate();
+        const currentMonth = date.getMonth();
+        const currentYear = date.getFullYear();
+
+        const slot = slots.find((slot) => (
+            slot.date===currentDate && slot.month===currentMonth && slot.year===currentYear
+        ));
+
         return slot!==undefined;
     }
-    console.log(slots)
+
     return (
 
         <>
@@ -155,6 +165,8 @@ const CreateSlot = () => {
                         variant="contained" 
                         onClick={handleSubmit}
                     >Create</Button>
+
+                    <ToastContainer />
                 </div>
             }
         </>

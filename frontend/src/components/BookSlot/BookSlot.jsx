@@ -11,6 +11,7 @@ import { UserContext } from "../../store/user";
 import { ReactComponent as Loading } from "../../assets/loading.svg";
 import { SlotContext } from "../../store/slot";
 import { bookSlot } from "../../actions/slot";
+import { ToastContainer, toast } from 'react-toastify';
 
 const BookSlot = () => {
 
@@ -60,9 +61,7 @@ const BookSlot = () => {
         
 
         const temp = slots.filter((slot) => {
-            // const tempDate = new Date(slot.date)
-            return day===slot.date && month===slot.month && year===slot.year
-            // new Date(slot.date).getTime()===new Date(date).getTime()
+            return day===slot.date && month===slot.month && year===slot.year && slot.count>0
         });
 
         setTimeSlots(temp);
@@ -106,18 +105,44 @@ const BookSlot = () => {
                 year : date.getFullYear(),
                 startTime: time
             }));
+
+            toast.success("Successfully booked!", {
+                position: toast.POSITION.BOTTOM_LEFT,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'colored'
+            });
+
         } catch (error) {
             console.log(error);
+
+            toast.error("Error! Try Again.", {
+                position: toast.POSITION.BOTTOM_LEFT,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'colored'
+            });
         }
 
     }
 
     const disableDates = (date) => {
-        const currentDate = date.getTime();
+        
+        const currentDate = date.getDate();
+        const currentMonth = date.getMonth();
+        const currentYear = date.getFullYear();
 
-        const slot = slots.find((slot) => {
-            return new Date(slot.date).getTime()===currentDate && slot.count!==0
-        });
+        const slot = slots.find((slot) => (
+            slot.date===currentDate && slot.month===currentMonth && slot.year===currentYear
+        ));
 
         return slot===undefined;
     }
@@ -127,6 +152,7 @@ const BookSlot = () => {
         <>
             {
                 isLoading ? <Loading /> : 
+
                 <div className="book-slot-box">
 
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -134,7 +160,7 @@ const BookSlot = () => {
 
                             <div className="col-md-6">
                                 <CalendarPicker 
-                                    // shouldDisableDate={disableDates}
+                                    shouldDisableDate={disableDates}
                                     className="create-slot-calendar"
                                     date={date} 
                                     onChange={onSelectDate}
@@ -166,6 +192,8 @@ const BookSlot = () => {
                     >Book Slot</Button>
                 </div>
             }
+
+            <ToastContainer />
         </>
     );
 }
