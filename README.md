@@ -16,6 +16,8 @@ People below the poverty line are provided with an official document, i.e. ratio
     <img src='./Sugam.png' width="300px" />
 </p>
 
+_[Sugam](https://sugam-frontend.netlify.app/)_
+
 To eliminate the queue formed in front of the ration shops and to put an end to all the malpractices, we are proposing a slot booking application that will allow the consumers to reserve a specific time for the collection of ration. People can book a slot according to their convenience, they would just have to enter their ration card details and select a date and time to confirm their booking.
 
 ## Features
@@ -142,6 +144,19 @@ Start the project
 npm start
 ```
 After this the client start running at localhost:3000 and one can interact with the website.
+
+## Usage
+Test data that need to be entered while using the site.
+#### User Details
+`Ration Number`:`12buhy89039994`<br>
+`Name`:`Test User`<br>
+`State`:`Uttar Pradesh`<br>
+`City`:`Saharanpur`<br>
+#### Distributor Details
+`Number`:`268t811tev1781`<br>
+`Name`:`Test Distributor`<br>
+`State`:`Uttar Pradesh`<br>
+`City`:`Saharanpur`<br>
 
 ## Future Scope
 
