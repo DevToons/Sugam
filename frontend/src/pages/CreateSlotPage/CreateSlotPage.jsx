@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
 import './CreateSlotPage.css';
 import CreateSlot from '../../components/CreateSlot/CreateSlot';
 import Button from '@mui/material/Button';
