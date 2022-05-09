@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 import BookSlot from "../../components/BookSlot/BookSlot";
 import ConfirmBooking from "../../components/ConfirmBooking/ConfirmBooking";
 import { slotReducer } from "../../reducer/slot";

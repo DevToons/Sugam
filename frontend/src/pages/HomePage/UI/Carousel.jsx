@@ -1,5 +1,6 @@
 import React from "react";
 import { Carousel } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import pic1 from './static/pic1.jpg'
 import pic2 from './static/pic2.jpg'
 import pic3 from './static/pic3.jpg'

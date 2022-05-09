@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 import './ActiveSlotsPage.css';
 import { MarkDoneContext } from "../../store/markDone";
 import ActiveSlotsTable from "../../components/ActiveSlotsTable/ActiveSlotsTable";
