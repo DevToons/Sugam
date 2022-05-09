@@ -8,7 +8,7 @@ const HomePage = () => {
         <div className="headbody">
             {/* <h1>Home</h1> */}
             <Carousel1 />
-            <About />
+            {/* <About /> */}
         </div>
     );
 }
