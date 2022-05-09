@@ -16,54 +16,52 @@ const vonage = new Vonage({
     apiSecret: process.env.API_SECRET
 })
 
-//dashboard
 router.get('/user/:userId/dashboard', protect, async(req, res) => {
-        const userId = req.params.userId;
+    const userId = req.params.userId;
 
-        try {
-            const user = await User.findOne({ uid: userId });
+    try {
+        const user = await User.findOne({ uid: userId });
 
-            if (!user) {
-                res.send({
-                    message: "registrations is required"
-                });
-            }
-
-            const distributor = await Distributer.findById(user.distributorId);
-
-            res.status(200).send({
-                state: user.state,
-                name: user.name,
-                rationNo: user.rationNo,
-                city: user.city,
-                image: user.image,
-                uid: user.uid,
-                distributorName: distributor.name,
-                distributorNo: distributor.number
+        if (!user) {
+            res.send({
+                message: "registrations is required"
             });
+        }
 
-        } catch (error) {
-            res.status(400).send(error);
-        };
-    })
-    //checked
+        const distributor = await Distributer.findById(user.distributorId);
+
+        res.status(200).send({
+            state: user.state,
+            name: user.name,
+            rationNo: user.rationNo,
+            city: user.city,
+            image: user.image,
+            uid: user.uid,
+            distributorName: distributor.name,
+            distributorNo: distributor.number
+        });
+
+    } catch (error) {
+        res.status(400).send(error);
+    };
+})
+
 router.post('/user/:userId/register', protect, async(req, res) => {
-        const userId = req.params.userId;
-        const data = req.body;
-        try {
-            const user = await User.findOne(req.body);
-            user.uid = userId;
-            console.log(user)
+    const userId = req.params.userId;
+    const data = req.body;
+    try {
+        const user = await User.findOne(req.body);
+        user.uid = userId;
 
-            await user.save();
+        await user.save();
 
-            res.status(200).send(user);
+        res.status(200).send(user);
 
-        } catch (error) {
-            res.status(400).send(error);
-        };
-    })
-    //checked
+    } catch (error) {
+        res.status(400).send(error);
+    };
+})
+
 router.get('/user/:userId/getSlots', protect, async(req, res) => {
 
     const userId = req.params.userId;
@@ -80,24 +78,18 @@ router.get('/user/:userId/getSlots', protect, async(req, res) => {
         res.status(400).send(e)
     }
 });
-//checked
+
 router.post('/user/:userId/bookSlot', protect, async(req, res) => {
 
     const userId = req.params.userId;
     const { date, month, year, startTime } = req.body;
-    console.log(req.body)
-        // const tempDate = new Date(new Date(date).getTime() + 24 * 3600000);
+
     try {
         const user = await User.findOne({ uid: userId });
-        console.log(user)
         const distributerId = user.distributorId;
         const distributer = await Distributer.findById({ _id: distributerId });
-        console.log(distributer)
         const distributerUid = distributer.uid;
-        console.log(distributerUid)
-        console.log(date)
         const slot = await Slot.findOne({ date, month, year, startTime, distributerId: distributerUid });
-        console.log(slot)
         slot.count--;
         await slot.save();
 
@@ -110,7 +102,6 @@ router.post('/user/:userId/bookSlot', protect, async(req, res) => {
             year,
             time: startTime,
         })
-        console.log(booked)
         await booked.save()
         res.status(201).send({ message: "successfully booked" })
 
@@ -120,22 +111,6 @@ router.post('/user/:userId/bookSlot', protect, async(req, res) => {
 });
 
 router.post("/user/:userId/generateReceipt", protect, async(req, res) => {
-    // res.header('Content-Type', 'application/json');
-    // console.log(req.body);
-    // client.messages
-    //     .create({
-    //         from: process.env.TWILIO_PHONE_NUMBER,
-    //         to: req.body.to,
-    //         body: req.body.body
-    //     })
-    //     .then(() => {
-    //         res.send(JSON.stringify({ success: true }));
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //         res.send(JSON.stringify({ success: false }));
-    //     });
-
     const from = "+918882158330"
     const to = req.body.to;
     const text = req.body.body;

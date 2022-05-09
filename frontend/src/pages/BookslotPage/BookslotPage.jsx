@@ -6,9 +6,9 @@ import { SlotContext } from "../../store/slot";
 
 const BookSlotPage = () => {
 
-    const [ bookedSlot, dispatchBookedSlot ] = React.useReducer(slotReducer, {
-        date:'',
-        startTime:0
+    const [bookedSlot, dispatchBookedSlot] = React.useReducer(slotReducer, {
+        date: '',
+        startTime: 0
     });
 
     const provider = {
@@ -23,6 +23,11 @@ const BookSlotPage = () => {
                 <BookSlot />
                 <ConfirmBooking />
             </div>
+            <Link to="/user/1/details">
+                <Button className="create-slot-button" variant="contained">
+                    Go Back
+                </Button>
+            </Link>
         </SlotContext.Provider>
     );
 }

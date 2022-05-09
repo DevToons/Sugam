@@ -12,12 +12,17 @@ const ActiveSlotsPage = () => {
         markDone,
         dispatchMarkDone
     }
-    
+
     return (
         <MarkDoneContext.Provider value={provider}>
             <div className="active-slot-page">
                 <ActiveSlotsTable />
             </div>
+            <Link to="/distributor/1/details">
+                <Button className="create-slot-button" variant="contained">
+                    Go Back
+                </Button>
+            </Link>
         </MarkDoneContext.Provider>
     );
 }

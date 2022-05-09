@@ -53,9 +53,9 @@ export const Carousel1 = () => {
                         <h3 className={`px-10 ${styles.header}`}>Sugam</h3>
                         <p className={styles.sub_heading}>Collect Ration With Ease</p>
                         <p className={styles.sub_heading2}>The dates on which the ration packages are available will be visible on the portal itself. According to those dates, the ration cardholders of your family can book a slot so that you can collect their ration packages and face no difficulty in doing so. </p>
-                        <button className={styles.btn}>
+                        <Link to='/userSignup'> <button className={styles.btn}>
                             Get Started
-                        </button>
+                        </button></Link>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
