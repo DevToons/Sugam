@@ -125,70 +125,6 @@ const UserRegistrationPage = () => {
         <>
             {
                 isLoading ? <Loading /> :
-
-                    // <div className="registration-box">
-
-                    //     <h1>User Registration</h1>
-
-                    //     <TextField
-                    //         label="Enter Ration Card Number"
-                    //         size="small"
-                    //         name="rationNo"
-                    //         value={details.rationNo}
-                    //         onChange={handleChange}
-                    //         fullWidth
-                    //     />
-
-                    //     <TextField
-                    //         label="Enter Name"
-                    //         size="small"
-                    //         name="name"
-                    //         value={details.name}
-                    //         onChange={handleChange}
-                    //         fullWidth
-                    //     />
-
-                    //     <TextField 
-                    //         label="Select State" 
-                    //         margin="dense"
-                    //         size="small"
-                    //         name="state"
-                    //         select
-                    //         fullWidth
-                    //         value={details.state} 
-                    //         onChange={handleChange}
-                    //     >
-                    //         {
-                    //             states.map((state, index) => (
-                    //                 <MenuItem key={index} value={state.state_name}>{state.state_name}</MenuItem>
-                    //             ))
-                    //         }
-                    //     </TextField>
-
-                    //     <TextField 
-                    //         label="Select City" 
-                    //         margin="dense"
-                    //         size="small"
-                    //         name="city"
-                    //         select
-                    //         fullWidth
-                    //         value={details.city} 
-                    //         onChange={handleChange}
-                    //     >
-                    //         {
-                    //             cities.map((city, index) => (
-                    //                 <MenuItem key={index} value={city.city_name}>{city.city_name}</MenuItem>
-                    //             ))
-                    //         }
-                    //     </TextField>
-
-                    //     <Button 
-                    //         variant="contained" 
-                    //         onClick={handleSubmit}
-                    //         fullWidth
-                    //     >Verify & Proceed</Button>
-
-                    // </div>
                     <div className="h-full py-16 px-4">
                         <div className="bg-grey-lighter min-h-screen flex flex-col con1">
                             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 con2">
@@ -212,7 +148,6 @@ const UserRegistrationPage = () => {
                                                 </label>
                                                 <TextField
                                                     id="ration"
-                                                    label="Enter Ration Card Number"
                                                     size="small"
                                                     name="rationNo"
                                                     value={details.rationNo}
@@ -230,7 +165,6 @@ const UserRegistrationPage = () => {
                                                 </label>
                                                 <TextField
                                                     id="name"
-                                                    label="Enter Name"
                                                     size="small"
                                                     name="name"
                                                     value={details.name}
