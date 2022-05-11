@@ -11,7 +11,6 @@ import { ToastContainer, toast } from 'react-toastify';
 const ActiveSlot = ({ id, details, image, time, status }) => {
 
     const { user, dispatchUser } = React.useContext(UserContext);
-    
     const { markDone, dispatchMarkDone } = React.useContext(MarkDoneContext);
     const handleChange = async () => {
 

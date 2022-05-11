@@ -8,15 +8,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import { MarkDoneContext } from "../../store/markDone";
-import { setMarkDone } from "../../actions/markDone";
 import { UserContext } from "../../store/user";
 import { ReactComponent as Loading } from "../../assets/loading.svg";
 
 const ActiveSlotsTable = () => {
-
     const { markDone, dispatchMarkDone } = React.useContext(MarkDoneContext);
     const { user, dispatchUser } = React.useContext(UserContext);
-
     const [bookSlotData, setBookSlotData] = React.useState([]);
     const [isLoading, doneLoading] = React.useState(true);
 
@@ -51,7 +48,6 @@ const ActiveSlotsTable = () => {
 
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-
                             <TableHead>
                                 <ActiveSlot
                                     id="Slot Id"

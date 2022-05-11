@@ -2,7 +2,6 @@ import React from "react";
 import UserDetails from "../../components/UserDetails/UserDetails";
 import Button from '@mui/material/Button';
 import { useNavigate, useParams } from "react-router-dom";
-import { userData } from "../../data/userData";
 import { UserContext } from "../../store/user";
 import './UserDetailsPage.css';
 import { UserDetailsContext } from "../../store/userDetails";

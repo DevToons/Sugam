@@ -1,6 +1,5 @@
 import React from "react";
 import './ConfirmBooking.css';
-import { bookSlotData } from '../../data/bookSlotData';
 import { SlotContext } from "../../store/slot";
 import { UserContext } from "../../store/user";
 import moment from 'moment';

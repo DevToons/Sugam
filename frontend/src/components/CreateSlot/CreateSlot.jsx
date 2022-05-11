@@ -36,7 +36,6 @@ const CreateSlot = () => {
       );
 
       const data = await res.json();
-      console.log(data);
       setSlots(data);
 
       doneLoading(false);
