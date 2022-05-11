@@ -12,7 +12,7 @@ const Userschema = new mongoose.Schema({
         type: String,
     },
     state: {
-        tyep: String,
+        type: String,
     },
     image: {
         type: String,

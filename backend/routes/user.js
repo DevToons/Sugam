@@ -1,5 +1,4 @@
 const express = require("express");
-const validator = require("validator")
 const router = new express.Router();
 const { protect } = require('../Middleware/protect');
 const Booked = require("../model/bookedSlot");
