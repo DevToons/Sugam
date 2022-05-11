@@ -44,7 +44,6 @@ const BookSlot = () => {
             });
 
             const data = await res.json();
-            console.log(data)
             setSlots(data);
 
             doneLoading(false);
@@ -71,12 +70,10 @@ const BookSlot = () => {
     
 
     const onSelectDate = (newDate) => {
-        console.log(newDate)
         setDate(newDate)
     }
 
     const handleSubmit = async () => {
-        console.log(date, time);
 
         try {
             const res = await fetch(`https://sugam-backend.herokuapp.com/user/${user.user.uid}/bookSlot`, {
@@ -94,10 +91,8 @@ const BookSlot = () => {
                     startTime: time
                 })
             });
-            console.log(res)
             const data = await res.json();
             alert("Slot Booked Successfully")
-            console.log(data);
 
             dispatchBookedSlot(bookSlot({
                 date : date.getDate(),

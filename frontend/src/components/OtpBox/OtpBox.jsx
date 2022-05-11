@@ -23,26 +23,6 @@ const OtpBox = (props) => {
     }
 
     return (
-        // <div className="signup-box">
-
-        //     <h1>OTP Verification</h1>
-
-        //     <TextField
-        //         label="Enter OTP"
-        //         type="tel"
-        //         size="small"
-        //         value={otp}
-        //         onChange={handleChange}
-        //         fullWidth
-        //     />
-
-        //     <Button 
-        //         variant="contained" 
-        //         onClick={handleSubmit}
-        //         fullWidth
-        //     >Verify & Proceed</Button>
-
-        // </div>
         <div className="h-full py-16 px-4">
             <div className="bg-grey-lighter min-h-screen flex flex-col con1">
                 <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 con2">
@@ -56,7 +36,6 @@ const OtpBox = (props) => {
                         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border-2 border-gray-300 con4">
                             <form
                                 className="space-y-6"
-                                //   onSubmit={handleSubmit(onSubmit)}
                             >
                                 <div className="field">
                                     <label
@@ -69,7 +48,6 @@ const OtpBox = (props) => {
                                         <input
                                             id="name"
                                             type="text"
-                                            // {...register("name", { required: true })}
                                             autocomplete="name"
                                             required
                                             onChange={handleChange}
